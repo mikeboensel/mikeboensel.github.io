@@ -53,7 +53,7 @@ function setup() {
 	var x = 1;
   createCanvas(config.canvasWidth, config.canvasHeight);
   document.getElementById('canvasDiv').appendChild(canvas);
-  state.addImage('/images/2018-01-09-image-reveals/Heli.jpg'); //DogPants.png
+  state.addImage('/images/2018-01-09-image-reveals/Heli.JPG'); //DogPants.png
   loadAndScaleImage();
   noStroke();
   statOutput = $('#statOutput p');
