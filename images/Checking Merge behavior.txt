@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+his line should say DEQGHI
+=======
 his line should say DEDGHI
+>>>>>>> ab4029a0c737f8cc92a694c04982e72887e7e816
 
 Total line change
 
