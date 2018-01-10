@@ -1,0 +1,62 @@
+Rally Internet! You're under attack! A corrupt FCC commissioner is going to sell us all down the river for cash from the companies he's regulating!
+
+I'm not here to tell you that's wrong, but rather to offer a more productive channel for that anger.
+
+Its nearly impossible over the last month to have not been told through many sources to be outraged about an 
+upcoming FCC roll back of net neutrality provisions. The awareness is incredibly diverse. I've had a ton of non-technical people 
+ask me about it. 
+
+Some background in case your homepage reddit.com/r/awww and your on a strict diet of
+cute puppies pictures (not the worst idea with the level of divisiveness and toxicity currently online). Someone produces an article, videos a cat, tweets, etc. We'll call them a Content 
+Producer. You decide you'd like to see a cat playing piano. As such you are the Consumer of the content. In order to get this Content there is a vast array of 
+Internet content is brought into your homes via a vast network architecture. Internet Service Providers (ISPs) build out networks of cabling and information routing, both 
+residential (the cabling leading into your home) and commercial (interconnects where everyone's traffic flows). 
+
+Under existing rules ISPs are not allowed to discriminate against the content they provide. They must treat all communication the same. Hence neutrality. 
+They can't speed up, slow down, or block certain sites or services. While this wasn't always enforced by law, its the way the Internet has traditionally worked for the 
+last 30 years.
+
+Come Dec 14th 
+
+
+My natural reaction was disgust. While I'm sure this isn't illegal, it certainly unethical. Another case of a regulatory agency being run by a former lobbyist 
+positioning himself for a cushy job after his "public service". 
+There are a number of enraging aspects to the story. However, on reading some interviews with him he comes across as intelligent and well meaning enough. Maybe in 
+this hyper partisan era we inhabit I was in the wrong and lashing out at someone with a differing philosophy. 
+
+So in the spirit of openess, some questions for Pai:
+0) How do we judge the success or failure of the new rules? I've heard access to broadband mentioned. Is there a longer term roadmap? Plans to revisit and ensure that
+ISPs don't just collect rent?
+
+1) What concrete data points would make you think the Internet is a marketplace with robust competition? 
+
+2) What would be disasterous for the long term health of the internet? What behavior would you not tolerate and would cause a reversal of the 
+newly proposed lax rules?
+
+There's obviously great concern that by positioning 
+
+3) This one seems rhetorical, but I swear its not. 
+What do you see the FCC's role as? My understanding is the FCC is in place to represent the consumer. 
+As a hypothecal: let's say there a large majority of the American public (70%) feel that neutrality rules should be in place. 
+As the commissioner if you disagreed with the long term results of neutrality would you still be obligated to follow this public sentiment? 
+Or should you act in our best interests?
+
+4) You seem to be advocating self regulation and a wait and see model. While I'll agree in a perfect world this would be ideal, it seems to be an academic's
+modeling pipe dream.
+It has been clearly demonstrated that companies do not self regulated. Reasons include:
+Individuals within the company have different timeframes and motivations that the broader corporate entity. An executive who can double sales over a 5 year period through exploitative 
+practices stands to make large sums of money. The sales practices used may be unsustainable or illegal, but companies rarely have appropriate claw back procedures. They fire him to save
+face, he goes off to golf, the company gets a slap on the wrist (blame is rarely distributed appropriately by the legal system), and the consumer holds the bag. 
+
+Consumers lack appropriate substitute. They have no feedback mechanism. 
+
+
+Reasons for hope:
+1) The content portion of the Internet is no longer some rag tag group of small companies and bloggers. Google and others are larger than the telecos. Let's take a 
+pessimistic view and say everything in the government is for sale and the FCC rules are a blatant handout to telecos who will abuse their newfound middleman positions.
+If this does hurt Google, et al, they will buy a swing vote on the FCC or enough Congressmen to enact legislation. Basic economics would dictate it. 
+
+Not the brightest view of our system, but it may alleviate this issue. 
+
+
+2) Americans hate the telecos. And for good reason. They nickel and dime due to their natural monopoly. Its unlikely that they won't grossly abuse their new power. 

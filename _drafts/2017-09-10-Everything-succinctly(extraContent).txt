@@ -1,0 +1,78 @@
+
+
+Many people either speak in jargon 
+that is intimidating to new comers because they are operating at a different level or are trying to impress you with their vernacular. "Look how much I know. You have to google 
+5 of those words I just spoke." 
+
+Fundamentally it comes down to a failure to understand the level you should be operating at for the audience and dial things down and slowly speed them up,
+don't understand themselves, or are more interested in research than teaching.  Especially in school.  This makes the high quality resources I've had the priviledge to read like Michael Nielsen, Mike Bostock, Salman Khan, etc. all the more
+impressive.
+Gaps in knowledge build upon themselves and become discouraging. In my example above I used functions (and graphing) under the assumption you were familiar with them. If you weren't
+ you immediately would feel lost. For the record, a function is an equation. Its like a factory. It takes input, you turn the crank, and it produces an output. 
+3. 
+What typically prevents people? 
+
+. In my example above I used functions (and graphing) under the assumption you were familiar with them. If you weren't
+ you immediately would feel lost. For the record, a function is an equation. Its like a factory. It takes input, you turn the crank, and it produces an output. 
+
+
+
+ For example: 
+
+ Computing in general brings in more different topics, that you may never have been introduced to and treats them as something you should already know. This erodes confidence. 
+Once you feel like you are behind in something you develop a sense you are an imposter. Concepts build upon prior concepts you didn't grasp and your knowledge becomes shakier and shakier.
+
+
+I didn't help myself out either. 
+Great teachers make things simple. They make it intuitive. We live in a golden age, where teachers are not gated from us by the decisions of publishers, academic institutions, etc. Many great people spend time explaining complex subjects in simple terms, without losing accuracy about the subject!
+
+ in college were not interested in teaching
+
+I have such a strong belief in this because I was not a great student. In the years after school I have done a ton of work to grasp as much as I can. Once I understood, 
+
+I think there 
+
+
+ Whoever you are, there are gaps.
+
+  Here's my minute elevator pitch:
+
+" There's nothing wrong with that, 
+
+>>>
+In the process of trying to keep courses "simple" and not involving other subject matter we create a series of magic rules that must be memorized without intuition as to why or how they came to be. 
+
+*Obviously we can't cater to all those audiences at the same time. However, I believe that by introducing concepts in plain English, with plenty of illustration we can build 
+on concepts until we are at a point that satisfies even the most technical audience. 
+
+
+"Computers are ubiquitous, but they're mysterious. Even very capable programmers typically have big gaps in their knowledge. I would know. 
+I've been programming for 10 years. For the first 5 I felt like an imposter. I knew enough to do my job, but just barely with the help of Google. 
+ and its only through a ton of studying after college that I'm beginning to feel like I have  people "
+
+I'm a firm believer that anything can be taught, to anyone, given sufficient interest by the reader and understanding by the person teaching. 
+
+Actually that sounds pretty arrogant. Let's start over. I'm Mike. I got into Computer Engineering for 2 reasons: 
+1) I viewed college as an investment culminating in a job and future career. I skimmed a few lists of Bachelor requiring professions and annual salary. 
+Engineering was clearly at the top. Computer Engineering and Science a bit above the rest of the field. 
+2) I thought it was magical that you could take a handful of sand and create something intelligent. 
+
+As I learned (and you will!) there's a lot less intelligence to a computer than it would appear. What there is is a high degree of order and structure imposed on physical properties of matter. 
+It really is a beatiful thing. It essentially the worlds most complicated abacus. (seriously, if we added a crank (and wouldn't you know it someone did), it would be a fair analogy) One that can be extended in a nearly infinite number of directions to achieve almost any desired result.
+
+So.. where do we start?
+
+And what is this? This series is not a tutorial. We won't be learning Java, C++, etc. directly. Instead, I'll be trying to make it easier for you to learn these things in the future. 
+The greatest obstacle to true comprehension is that over 50 years we've progressed from manually plugging in wires, or punchcards to high level languages, GUIs, etc. The scope of what we do has exploded. This necessitates taking a higher level approach. 
+Imagine you are programming a game. The game screen has millions of pixels. You certainly can't write code that explicitly sets the color for each one. You need to think at a higher level. 
+This higher level thought means a whole generation of programmers know rules, but not the thought behind it. Not the reason. 
+
+For example: Why are arrays typically zero indexed? Is it just a quirky feature of languages. Something you have to learn, through repetition and errors? Rote memorization is the worst way to learn. Its miserable. You try to 
+cram as much into your short term memory as possible so you can pass a test or complete some task, then you promptly forget it. But understanding of purpose. Mnemonics. Those help build a solid foundation. 
+
+
+What this is is an attempt to create a comprehensive framework of knowledge around computing topics.
+You won't leave knowing everything, but we will go from a beginners understanding to touching on subjects 
+that would be at home in college lectures. When you come across concepts you'll have a starting point for learning more.
+
+
