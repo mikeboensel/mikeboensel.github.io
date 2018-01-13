@@ -47,9 +47,10 @@ scriptFolder: "/scripts/2018-01-09-image-reveals"
       height: 0;
       z-index: -1;
     }
-
-    .centeredSubContent {
-      text-align: center;
+	
+    .centeredSubContent { /*Takes into account the fact we are in a compressed, centered "reading area". Don't want to protrude from that. */
+      max-width: calc(760px - (30px * 2));
+	  text-align: center;
     }
 
     #defaultCanvas0 {
@@ -81,8 +82,8 @@ Some ideas for further work:
 
 
   <div class="container">
-    <div class="row centeredSubContent" id="statOutput">
-      <p>Stats go here</p>
+    <div class="row centeredSubContent" style="margin-bottom:10px" id="statOutput">
+      <code>Stats go here</code>
     </div>
 
     <div class='row centeredSubContent' id="canvasDiv">

@@ -53,7 +53,7 @@ function setup() {
   state.addImage('/images/2018-01-09-image-reveals/Heli.JPG'); //DogPants.png
   loadAndScaleImage();
   noStroke();
-  statOutput = $('#statOutput p');
+  statOutput = $('#statOutput code');
   noLoop(); //wait for image to load
 }
 var statOutput;
