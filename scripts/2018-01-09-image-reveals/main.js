@@ -1,31 +1,34 @@
 var config = {
-  'loopLimit': 420, //TODO call 'stepLimit' or 'numOfDesiredSteps'
+  stepsPerImage: 520, 
+  repeatImages : true,
   'revealTechnique': "balls",
   'validTechniques':['balls', 'points', 'colorRotation','partialImages'],
   'clearBetweenPics': false,
-  'canvasWidth': 300,
-  'canvasHeight': 300
+  resizeOnNewImageHeight : false //Resizing the canvas means losing the prior image painted
 };
 
 var globalState ={
-	'startTime': new Date()
+	'startTime': new Date(),
+	yOffset : 0
 };
 
 var state = {
-  'i': 0, //TODO should be called currStep. Refactoring is hard in Atom. Do in better editor.
+  currStepNum: 0, 
   'startTime': new Date(),
   //Start out w/ just reference to an image location (src).
   //On display we create P5Images (p5Img).
-  'images': [],
+  images: [],
   'addImage': function(src) {
     this.images.push({
       'src': src,
-      'p5Img': ''
+      'p5Img': '',
+	  loadInProgress:false //Some race conditions possible, but we will handle elsewhere.
     });
   },
   'convertImage': function(index, p5Img) {
     //Overwrite our empty string or out of date (wrong dimensions) p5Img
     this.images[index]['p5Img'] = p5Img;
+	this.images[index]['loadInProgress'] = false;//Update flag
   },
   'currImagesIndex': 0,
   'incrementImageIndex': function() {
@@ -45,13 +48,15 @@ var state = {
 };
 
 function setup() {
-	
+	//Canvas initialization
 	var width = $('.post').width()-60;
   //createCanvas(config.canvasWidth, config.canvasHeight);
   createCanvas(width, width);
   document.getElementById('canvasDiv').appendChild(canvas);
-  state.addImage('/images/2018-01-09-image-reveals/Heli.JPG'); //DogPants.png
-  loadAndScaleImage();
+
+  state.addImage('/images/2018-01-09-image-reveals/Heli.JPG'); 	//Default image
+  state.addImage('/images/2018-01-09-image-reveals/BadgerFight.jpg'); //Secondary image
+  
   noStroke();
   statOutput = $('#statOutput code');
   noLoop(); //wait for image to load
@@ -69,7 +74,7 @@ function loadAndScaleImage() {
       newP5.resize(width, 0);
       state.convertImage(state.currImagesIndex, newP5); //Took src ref and created image
       newP5.loadPixels();
-      loop(); 
+      loop();
     });
   } else if (p5.width != canvas.width) { //Not properly scaled (we fit to width)
     p5.resize(width, 0);
@@ -82,12 +87,29 @@ function loadAndScaleImage() {
 }
 
 function draw() {
-  if (state.getCurrImage().p5Img.name != 'p5.Image') {
-    //If Image is not be loaded can't proceed. Wrong size, probably ok (boundary issues possible)
-    //but is a valid image async will true that up. Going to go with it, might get some cool "noise"
-    return;
+  if (state.getCurrImage().p5Img.name != 'p5.Image'){
+	if(state.getCurrImage().loadInProgress == false) {
+	  state.getCurrImage().loadInProgress = true;
+	  loadAndScaleImage();
+		//TODO Handle image loaded, but scaled to wrong size in future. For now we assume its probably ok (boundary issues possible)
+		// might get some cool "noise"
+		return;
+	}
+	else{
+		//Load in progress. Nothing to do but wait.
+		return;
+	}
   }
 
+  var p5Img = state.getCurrImage().p5Img;
+  
+	if(state.currStepNum == 0){
+		if (config.resizeOnNewImageHeight)// Resizing canvas to new image
+			resizeCanvas(p5Img.width, p5Img.height);
+		else//Calculate a y-offset so our X scaled image fits centered within the canvas
+			globalState.yOffset = (height - p5Img.height)/2;
+	}
+  
   //Interface. Draw and stats methods
   var animation = undefined;
 
@@ -103,18 +125,36 @@ function draw() {
       break;
     case 'partialImages':
 	  animation = partialImagesAction; //TODO requires additional argument, JS partial?
+	  //TODO additionally, uses 2 images. Lot to consider in the flow of things given how different this one is.
 	  animation = createPartialFunc(animation, state.getNextImage().p5Img);
       break;
     default:
       alert("Unknown option " + config.revealTechnique);
   }
 
-  animation.nextStep(state.i, state.getCurrImage().p5Img);
+  animation.nextStep(state.currStepNum, p5Img);
   
-  if (state.i >= config.loopLimit)
-    noLoop();
+  if (state.currStepNum >= config.stepsPerImage){
+	if(state.currImagesIndex < state.images.length - 1){
+		//We have more images to go through
+		state.incrementImageIndex();
+		reset();
+	}
+	else{//Ran through requested numSteps for each image
+		if(config.repeatImages){
+			//We repeat from the beginning
+			state.currImagesIndex = 0;
+			reset();
+		}
+		else{
+			//Done unless something changes (user uploads pic for example)
+			noLoop();
+		}
+	}
+  }
+    
 
-  state.i++;
+  state.currStepNum++;
 }
 
 //TODO test this method
@@ -136,32 +176,21 @@ function changeImage() {
     }
   }
   if (state.images.length > l) {
-    //Something was successfully uploaded. User wants to see, so let's display.
+    //Something was successfully uploaded. User wants to see, so let's display. Note they may have uploaded many images. We process the first and move on as needed.
     state.incrementImageIndex();
     loadAndScaleImage();
     reset();
   }
 }
-//TODO not sure if we need this anymore.
-function addImage() {
-  var v = document.getElementById("userProvidedImage");
-  if (v.files && v.files.length > 0) {
-    var tempImageSrc = URL.createObjectURL(v.files[0]);
-    //They are stored in temp location on localserver
-    loadAndScaleImage(tempImageSrc);
-    reset();
-  }
-}
 
 function reset() {
-  state.i = 0;
-  //TODO dump state to save memory if switching animation techniques
+  state.currStepNum = 0;
+  ballAnimation.clearState();
+  //TODO Better method than this to dump state to save memory if switching animation techniques OR image
   if (config.clearBetweenPics)
     ctrls.clearScreen();
   loop();
 }
-
-
 
 function propertyUpdate(e) {
   if (e.srcElement.type == 'select-one') {

@@ -49,7 +49,7 @@ scriptFolder: "/scripts/2018-01-09-image-reveals"
     }
 	
     .centeredSubContent { /*Takes into account the fact we are in a compressed, centered "reading area". Don't want to protrude from that. */
-      max-width: calc(760px - (30px * 2));
+      max-width: calc(690px - (30px * 2));
 	  text-align: center;
     }
 

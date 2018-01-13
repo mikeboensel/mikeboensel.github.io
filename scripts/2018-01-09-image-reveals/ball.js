@@ -1,14 +1,22 @@
 var ballAnimation = (function () {
-    var state = {
-        balls: []
-    };
+    var state = undefined;
+
+	function initializeState(){
+		state = {
+			balls: []
+		};
+	}
+	initializeState();
 
     var config = {
         splitChance: .01,
+		splitFactor: 2, //On split how many balls should result?
         minBallSize: 2,
         stepsPerStatUpdate: 10
     };
 
+	//Ball X and Y are in source image's coordinate system (not canvas'). 
+	//Since we scale to fit width, the X coords of both are the same, but Y are not.
     function createBall(x, y, vx, vy, r) {
         var ball = {};
         ball.x = x;
@@ -27,7 +35,7 @@ var ballAnimation = (function () {
 
     function ballAction(currStepNum, srcImg) {
         if (state.balls.length == 0)
-            createBall(0, 0, 3, 6, 12);
+            createBall(0, 0, 3, -6, 12); //TODO randomize start location/velocity once done testing.
 
         //var srcImg = state.getCurrImage().p5Img;
         state.balls.forEach(
@@ -35,7 +43,7 @@ var ballAnimation = (function () {
 				if (b.dead == false)
 				{ //TODO cleanup of memory usage in future
 				drawBall(b, srcImg);
-				updateLocation(b);
+				updateLocation(b, srcImg);
 			}
 		});
 
@@ -54,26 +62,27 @@ var ballAnimation = (function () {
 				(acc, val) => acc + val
 				);
 
-			statOutput.text(`Currently ${state.balls.length} balls in memory. ${numDead} are dead`);
+			statOutput.text(`Currently ${state.balls.length} balls in memory. ${numDead} are dead. Step #: ${currStepNum}`);
 		}
 	}
-
 
 
 	//Create 2 new balls, destroy older ball
 	function splitBall(ball) {
 		ball.dead = true;
-		createBallBasedOnOther(ball);
-		createBallBasedOnOther(ball);
+		for(var i = 0; i < config.splitFactor; i++){
+			createBallBasedOnOther(ball);
+		}
 	}
 
 	function drawBall(ball, srcImg) {
 		var pixelColorVal = imageUtils.getPixel(ball.x, ball.y, srcImg);
 		fill(pixelColorVal);
-		ellipse(ball.x, ball.y, ball.r, ball.r);
+		var yOffset = (height - srcImg.height)/2; //To center image
+		ellipse(ball.x, ball.y+yOffset, ball.r, ball.r);
 	}
 
-	function updateLocation(ball) {
+	function updateLocation(ball, srcImg) {
 		if (random(0, 1) < config.splitChance && ball.r > config.minBallSize) {
 			splitBall(ball);
 		} else {
@@ -85,17 +94,18 @@ var ballAnimation = (function () {
 				ball.x = width;
 			}
 			ball.y += ball.vy;
-			if (ball.y > height) {
+			if (ball.y > srcImg.height) {
 				ball.y = 0;
 			}
-			if (ball.x < 0) {
-				ball.x = height;
+			if (ball.y < 0) {
+				ball.y = srcImg.height;
 			}
 		}
 	}
 
 	return {
-		nextStep: ballAction
+		nextStep: ballAction,
+		clearState: initializeState
 	};
 
 })();

@@ -22,7 +22,7 @@ var pointAnimation = (function(){
 		//2-4 sec /1k batch
 		//2min+, 40sec,20sec,20sec				/10k
 		var pixelVal = imageUtils.getPixel(x, y, srcImg);
-		imageUtils.setPixel(x, y, pixelVal[0], pixelVal[1], pixelVal[2], pixelVal[3]);
+		imageUtils.setPixel(x, y + globalState.yOffset, pixelVal[0], pixelVal[1], pixelVal[2], pixelVal[3]);
 	  }
 
 	  updatePixels();
@@ -42,6 +42,8 @@ var pointAnimation = (function(){
 	};
 })();
 
-
-
-
+pointAnimation.prototype = {
+	clearState : 	function clearState(){
+		state = {};
+	}
+}
