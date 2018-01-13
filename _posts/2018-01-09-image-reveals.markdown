@@ -31,6 +31,7 @@ scriptFolder: "/scripts/2018-01-09-image-reveals"
 <script src="{{ page.scriptFolder }}/imageUtils.js"></script>
 <script src="{{ page.scriptFolder }}/ball.js"></script>
 <script src="{{ page.scriptFolder }}/pointAnimation.js"></script>
+<script src="{{ page.scriptFolder }}/colorRotationAnimation.js"></script>
 <script src="{{ page.scriptFolder }}/main.js"></script>
 
 <style>
@@ -87,13 +88,13 @@ Some ideas for further work:
     </div>
 
     <div class="row centeredSubContent">
-      <button type="button" class="btn btn-default" onclick="pause()" aria-label="Pause">
+      <button type="button" class="btn btn-default" onclick="ctrls.pause()" aria-label="Pause">
       <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
     </button>
-      <button type="button" class="btn btn-default" onclick="play()" aria-label="Left Align">
+      <button type="button" class="btn btn-default" onclick="ctrls.play()" aria-label="Left Align">
       <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
     </button>
-      <button type="button" class="btn btn-default" onclick="clearScreen()" aria-label="Clear Screen">
+      <button type="button" class="btn btn-default" onclick="ctrls.clearScreen()" aria-label="Clear Screen">
       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
     </button>
     </div>
@@ -119,6 +120,8 @@ Some ideas for further work:
       <select id="revealTechnique" name="revealTechnique" onchange="propertyUpdate(event)">
       <option value="balls" selected>Kinectic Balls</option>
       <option value="points">Points</option>
+      <option value="colorRotation">Color Rotation</option>
+
     </select>
     </div>
     <br>
