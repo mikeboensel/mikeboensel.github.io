@@ -30,6 +30,7 @@ scriptFolder: "/scripts/2018-01-09-image-reveals"
 <script src="/libraries/bootstrap-3.3.7-dist/js/bootstrap-3.3.7.min.js"></script>
 <script src="{{ page.scriptFolder }}/imageUtils.js"></script>
 <script src="{{ page.scriptFolder }}/ball.js"></script>
+<script src="{{ page.scriptFolder }}/pointAnimation.js"></script>
 <script src="{{ page.scriptFolder }}/main.js"></script>
 
 <style>

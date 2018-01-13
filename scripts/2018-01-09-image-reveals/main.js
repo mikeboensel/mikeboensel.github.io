@@ -1,6 +1,4 @@
 var config = {
-  'splitChance': .01,
-  'minBallSize': 2,
   'loopLimit': 420, //TODO call 'stepLimit' or 'numOfDesiredSteps'
   'revealTechnique': "balls",
   'validTechniques':['balls', 'points', 'colorRotation','partialImages'],
@@ -15,10 +13,13 @@ var config = {
   'canvasHeight': 300
 };
 
+var globalState ={
+	'startTime': new Date()
+};
+
 var state = {
   'i': 0, //TODO should be called currStep. Refactoring is hard in Atom. Do in better editor.
   'startTime': new Date(),
-  'balls': [],
   //Start out w/ just reference to an image location (src).
   //On display we create P5Images (p5Img).
   'images': [],
@@ -50,8 +51,10 @@ var state = {
 };
 
 function setup() {
-	var x = 1;
-  createCanvas(config.canvasWidth, config.canvasHeight);
+	
+	var width = $('.post').width()-60;
+  //createCanvas(config.canvasWidth, config.canvasHeight);
+  createCanvas(width, width);
   document.getElementById('canvasDiv').appendChild(canvas);
   state.addImage('/images/2018-01-09-image-reveals/Heli.JPG'); //DogPants.png
   loadAndScaleImage();
@@ -91,12 +94,14 @@ function draw() {
     return;
   }
 
+  //Interface. Draw and stats methods
+  
   switch (config.revealTechnique) {
     case 'balls':
-      ballAction();
+      ballAnimation.nextStep(state.i, state.getCurrImage().p5Img);
       break;
     case 'points':
-      pointAction();
+      pointAnimation.nextStep(state.i, state.getCurrImage().p5Img);
       break;
     case 'colorRotation':
       colorRotation();
@@ -112,61 +117,6 @@ function draw() {
     noLoop();
 
   state.i++;
-}
-//Pointilism style sampling picture into existence
-function pointAction() {
-  sampleUnderlyingImage();
-
-  var i = state.i;
-  //Update stats
-  if (i % 5 == 0) {
-    statOutput.text(i + ' iterations for a total of ' + i * config['pointSpecifics']['numSamples'] + " samples in " +
-      (((new Date()).getTime() - state['startTime'].getTime()) / 1000) + " seconds");
-  }
-}
-
-function ballAction() {
-  if (state.balls.length == 0)
-    createBall(0, 0, 3, 6, 12);
-
-  var srcImg = state.getCurrImage().p5Img;
-  state.balls.forEach(
-    b => {
-      if (b.dead == false) { //TODO cleanup of memory usage in future
-        drawBall(b, srcImg);
-        updateLocation(b);
-      }
-    }
-  );
-  //Update stats
-  if (state.i % 10 == 0) {
-    var numDead = state.balls.map(b => {
-      if (b.dead)
-        return 1;
-      return 0;
-    }).reduce((acc, val) => acc + val);
-
-    statOutput.text("Currently " + state.balls.length + " balls in memory. " +
-      numDead + " are dead");
-  }
-
-}
-
-function sampleUnderlyingImage() {
-  loadPixels();
-  //Batch, then update.
-  for (var i = 0; i < config.pointSpecifics.numSamples; i++) {
-    //TODO should be images dimensions in case we end up out of sync following resize
-    var x = Math.floor(random(0, width - 1));
-    var y = Math.floor(random(0, height - 1));
-    // var c = img.get(x, y);
-    //2-4 sec /1k batch
-    //2min+, 40sec,20sec,20sec				/10k
-    var imgSrc = getPixel(x, y, state.getCurrImage().p5Img);
-    setPixel(x, y, imgSrc[0], imgSrc[1], imgSrc[2], imgSrc[3]);
-  }
-
-  updatePixels();
 }
 
 function setPixel(x, y, r, g, b, a) {
@@ -232,8 +182,7 @@ function addImage() {
 
 function reset() {
   state.i = 0;
-  state.balls = [];
-  createBall(0, 0, 3, 6, 12);
+  //TODO dump state to save memory if switching animation techniques
   if (config.clearBetweenPics)
     clearScreen();
   loop();
