@@ -16,7 +16,7 @@ var colorRotationAnimation = (function() {
 		for (var x = 0; x < p5.width; x++) {
 		  var col = [];
 		  for (var y = 0; y < p5.height; y++) {
-			var pVals = getPixel(x, y, p5);
+			var pVals = imageUtils.getPixel(x, y, p5);
 			var alpha = pVals[3];
 			var hsl = rgbToHsl(pVals[0], pVals[1], pVals[2]);
 			hsl.push(alpha);
@@ -42,7 +42,7 @@ var colorRotationAnimation = (function() {
 		  hsla[0] = (hsla[0] + (config.degreesPerUpdate * currStepNum / 360)) % 1; //Degrees per step * step #
 		  //Our conversion code works on a [0-> 1] range for hue
 		  pVals = hslToRgb(hsla[0], hsla[1], hsla[2]);
-		  setPixel(x, y, pVals[0], pVals[1], pVals[2], hsla[3]); //replace hsla[3] with alpha if rolling back from optimized
+		  imageUtils.setPixel(x, y, pVals[0], pVals[1], pVals[2], hsla[3]); //replace hsla[3] with alpha if rolling back from optimized
 		}
 		updatePixels();
 	  }

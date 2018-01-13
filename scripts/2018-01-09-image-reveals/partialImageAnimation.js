@@ -10,8 +10,8 @@ var partialImageAnimation = (function (){
 		var startPos = state.i % 2;
 		for (var x = startPos; x < p5.width; x += 2) {
 			for (var y = startPos; y < p5.height; y +2) {
-				var pVals = getPixel(x, y, p5);
-				setPixel(x, y, pVals[0], pVals[1], pVals[2], pVals[3]);
+				var pVals = imageUtils.getPixel(x, y, p5);
+				imageUtils.setPixel(x, y, pVals[0], pVals[1], pVals[2], pVals[3]);
 			}
 		}
 		//Get the complementary startPos
@@ -20,8 +20,8 @@ var partialImageAnimation = (function (){
 
 		for (var x = startPos; x < p5.width; x += 2) {
 			for (var y = startPos; y < p5.height; y +2) {
-				var pVals = getPixel(x, y, p5_next);
-				setPixel(x, y, pVals[0], pVals[1], pVals[2], pVals[3]);
+				var pVals = imageUtils.getPixel(x, y, p5_next);
+				imageUtils.setPixel(x, y, pVals[0], pVals[1], pVals[2], pVals[3]);
 			}
 		}
 		updatePixels();

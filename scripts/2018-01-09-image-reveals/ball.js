@@ -43,64 +43,59 @@ var ballAnimation = (function () {
 
 }
 
-function updateStats(currStepNum) {
-    //Update stats
-    if (currStepNum % config.stepsPerStatUpdate == 0) {
-        var numDead = state.balls.map(b => {
-            if (b.dead)
-				return 1;
-			return 0;
-		}).reduce(
-			(acc, val) => acc + val
-			);
+	function updateStats(currStepNum) {
+		//Update stats
+		if (currStepNum % config.stepsPerStatUpdate == 0) {
+			var numDead = state.balls.map(b => {
+				if (b.dead)
+					return 1;
+				return 0;
+			}).reduce(
+				(acc, val) => acc + val
+				);
 
-		statOutput.text(`Currently ${state.balls.length} balls in memory. ${numDead} are dead`);
+			statOutput.text(`Currently ${state.balls.length} balls in memory. ${numDead} are dead`);
+		}
 	}
-}
 
 
 
-//Create 2 new balls, destroy older ball
-function splitBall(ball) {
-    ball.dead = true;
-    createBallBasedOnOther(ball);
-    createBallBasedOnOther(ball);
-}
+	//Create 2 new balls, destroy older ball
+	function splitBall(ball) {
+		ball.dead = true;
+		createBallBasedOnOther(ball);
+		createBallBasedOnOther(ball);
+	}
 
-function drawBall(ball, srcImg) {
-    var v = getPixel(ball.x, ball.y, srcImg);
-    fill(v);
-    ellipse(ball.x, ball.y, ball.r, ball.r);
-}
+	function drawBall(ball, srcImg) {
+		var pixelColorVal = imageUtils.getPixel(ball.x, ball.y, srcImg);
+		fill(pixelColorVal);
+		ellipse(ball.x, ball.y, ball.r, ball.r);
+	}
 
-function updateLocation(ball) {
-    if (random(0, 1) < config.splitChance && ball.r > config.minBallSize) {
-        splitBall(ball);
-    } else {
-        ball.x += ball.vx;
-        if (ball.x > width) {
-            ball.x = 0;
-        }
-        if (ball.x < 0) {
-            ball.x = width;
-        }
-        ball.y += ball.vy;
-        if (ball.y > height) {
-            ball.y = 0;
-        }
-        if (ball.x < 0) {
-            ball.x = height;
-        }
-    }
-}
+	function updateLocation(ball) {
+		if (random(0, 1) < config.splitChance && ball.r > config.minBallSize) {
+			splitBall(ball);
+		} else {
+			ball.x += ball.vx;
+			if (ball.x > width) {
+				ball.x = 0;
+			}
+			if (ball.x < 0) {
+				ball.x = width;
+			}
+			ball.y += ball.vy;
+			if (ball.y > height) {
+				ball.y = 0;
+			}
+			if (ball.x < 0) {
+				ball.x = height;
+			}
+		}
+	}
 
+	return {
+		nextStep: ballAction
+	};
 
-return {
-    nextStep: ballAction
-};
-
-})
-();
-
-
-
+})();
