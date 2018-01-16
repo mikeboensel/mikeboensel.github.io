@@ -12,6 +12,7 @@ var ballAnimation = (function () {
         splitChance: .01,
 		splitFactor: 2, //On split how many balls should result?
         minBallSize: 2,
+		startingBallSize: 12,
         stepsPerStatUpdate: 10
     };
 
@@ -32,10 +33,15 @@ var ballAnimation = (function () {
     function createBallBasedOnOther(ball) {
         createBall(ball.x, ball.y, random(-3, 3), random(-3, 3), ball.r - 1);
     }
+	
+	function createRandomBall(srcImg){
+		createBall(random(1, srcImg.width-1), random(1, srcImg.height-1), random(-3, 3), random(-3, 3), config.startingBallSize);
+	}
 
     function ballAction(currStepNum, srcImg) {
         if (state.balls.length == 0)
-            createBall(0, 0, 3, -6, 12); //TODO randomize start location/velocity once done testing.
+			createRandomBall(srcImg);
+            //createBall(0, 0, 3, -6, 12); 
 
         //var srcImg = state.getCurrImage().p5Img;
         state.balls.forEach(
@@ -64,6 +70,8 @@ var ballAnimation = (function () {
 
 			statOutput.text(`Currently ${state.balls.length} balls in memory. ${numDead} are dead. Step #: ${currStepNum}`);
 		}
+		
+		ctrls.movePlayHead(currStepNum);
 	}
 
 

@@ -1,5 +1,5 @@
 var config = {
-  stepsPerImage: 520, 
+  stepsPerImage: 1250, 
   repeatImages : true,
   'revealTechnique': "balls",
   'validTechniques':['balls', 'points', 'colorRotation','partialImages'],
@@ -24,6 +24,7 @@ var state = {
       'p5Img': '',
 	  loadInProgress:false //Some race conditions possible, but we will handle elsewhere.
     });
+	ctrls.addToCarousel(src);
   },
   'convertImage': function(index, p5Img) {
     //Overwrite our empty string or out of date (wrong dimensions) p5Img
@@ -52,10 +53,14 @@ function setup() {
 	var width = $('.post').width()-60;
   //createCanvas(config.canvasWidth, config.canvasHeight);
   createCanvas(width, width);
+  $('#imageCarousel').width(width);
   document.getElementById('canvasDiv').appendChild(canvas);
 
   state.addImage('/images/2018-01-09-image-reveals/Helicoptor.jpg'); 	//Default image
   state.addImage('/images/2018-01-09-image-reveals/BadgerFight.jpg'); //Secondary image
+  
+  ctrls.bindState(state);
+  ctrls.bindConfig(config);
   
   noStroke();
   statOutput = $('#statOutput code');

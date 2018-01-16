@@ -67,6 +67,59 @@ scriptFolder: "/scripts/2018-01-09-image-reveals"
 	  display: none;
 	}
 	
+	/* Carousel styling */	
+
+	#imageCarousel{
+       border: 1px solid #ede5e5;
+	   height: 120px;
+	   width: 80%; /* Will be overridden in setup() */
+	   overflow-x: auto;
+	   overflow-y: hidden;
+	   white-space: nowrap;
+   	   position: relative;
+	}
+	
+	#imageCarousel img {
+	   height: 100px;
+	   width: 100px; /*Going to lead to aspect ratio issues, but simplifies moving the playHead so much*/
+	}
+	
+	#playHead{
+		width: 5px;
+		background-color: #0000ff61;
+		position: absolute;
+		left: 0px;
+		height: 120px;
+		z-index: 1;
+	}
+	
+	.carouselImgContainer{
+	   border: 1px solid #ede5e5;
+	   display: inline-block;
+	   position: relative;
+	   margin: 7px 7px 7px 0px; /*No left margin. Total width = 107 pixels per image (including margin)*/ 
+	}
+	
+	.imgDeleteIcon{
+		position:absolute;
+		left: 6px;
+		top: 6px;
+		background-color : red;
+		padding: 3px;
+		z-index: 2;
+		visibility: hidden;
+	}
+	
+	.imgDeleteIcon:hover{
+		visibility: visible;
+	}
+	
+	#addImagesClickTarget{
+		width:100px;
+		height:100px;
+		display: inline-block;
+	}
+	
 </style>
 
 I spent some time recently playing around with Processing after watching Dan Shiffman's Coding Train channel on Youtube. The following is a work in 
@@ -101,13 +154,20 @@ Some ideas for further work:
     </button>
     </div>
     <!--TODO: Carousel of images to work thru -->
-    <div id="imageCarousel" class="row">
-	<!--
-      <img src="DogPants.png" width="100" height="100" alt="">
-      <img src="DogPants.png" width="100" height="100" alt="">
-	  -->
-    </div>
-
+  <div id="imageCarousel" class="row">
+	<div id="playHead"></div>
+	<!-- Template sample:
+	<div class='carouselImgContainer'>
+		<span class='imgDeleteIcon'>X</span>
+		<img src="/images/2018-01-09-image-reveals/DogPants.png">
+	</div>
+	-->
+	<!--<div id="addImagesClickTarget">
+		<span class="glyphicon glyphicon-folder-open" style="font-size: 45px" aria-hidden="true"></span>
+	</div>-->
+	
+  </div>
+	  
     <div class="row centeredSubContent">
       <input multiple type="file" onchange='changeImage()' id="userProvidedImage"/>
       <label for="userProvidedImage">
