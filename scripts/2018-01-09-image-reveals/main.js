@@ -54,7 +54,7 @@ function setup() {
   createCanvas(width, width);
   document.getElementById('canvasDiv').appendChild(canvas);
 
-  state.addImage('/images/2018-01-09-image-reveals/Heli.JPG'); 	//Default image
+  state.addImage('/images/2018-01-09-image-reveals/Helicoptor.jpg'); 	//Default image
   state.addImage('/images/2018-01-09-image-reveals/BadgerFight.jpg'); //Secondary image
   
   noStroke();

@@ -8,6 +8,9 @@ date:   2018-01-14 07:26:55 -0700
 .check{
 	color: green;
 }
+.fail{
+	color: red;
+}
 
 li > :first-child{
 	margin-bottom: 0px;
@@ -33,19 +36,19 @@ This blog is a solution to a problem. So my problem statement is:
 So an ideal solution hits these points:
 * __Get writing out to the world?__
 
-  <span class='check'>Check</span>. Reaches every human being 
+  <span class='check'>Check.</span> Reaches every human being 
 * Affordable?
 
-  Check. Free!
+  <span class='check'>Check.</span> Free!
 * Looks good?
 
-  Check. Looking good is objective, but let's define it as most people saying its not bad.
+  <span class='check'>Check.</span> Looking good is objective, but let's define it as most people saying its not bad.
 * Fast?
 
-  Check. Sends only my article across the wire (can't do better than that)
+  <span class='check'>Check.</span> Sends only my article across the wire (can't do better than that)
 * Few non-writing tasks?
 
-  Check. Requires no maintenance to keep running. Big changes are easy. 
+  <span class='check'>Check.</span> Requires no maintenance to keep running. Big changes are easy. 
 
 Obviously these criteria conflict and we will have to make some tradeoffs. We also aren't putting concrete metrics to things like "Affordable". But this is a 
 toy problem. So cut me some slack. I don't want to bludgeon you with a 20 page post.
@@ -80,53 +83,70 @@ far beyond my immediate geography. Ok, so no need to waste more time here.
 Stick with me, this seem pedantic, but we're moving in a direction. Namely, we've evaluated a family of solutions in respect to our problem. Do they look 
 promising? If so, we drill down. Since they don't we move on. 
 
-To meet our cost conern the Internet seems promising. Well the simplest thing would be just putting a bunch of txt files up on a server. 
+To meet our cost concern the Internet seems promising. Distribution is relatively cheap. The simplest thing would be just putting a bunch of txt files up on a server. 
 
 * __Get writing out to the world?__
+
   Check. Anyone with a computer. They can use their browser to view the files. Or they can download them with a 
   utility like WGET. 
   Text files are simple. No formatting, so no requirements on special software.
 * Cheap?
+
   Check.  
 * Looks good?
+
   Fail. You can do a lot of things with ASCII, but the art, tables, and diagrams are more impressive 
   because you're making due with so little, than impressive for their own sake.
 * Fast?
+
   Check. The best!
 * Lot of maintenance?
+
   Nope. Couldn't be a simpler setup.
   
-3 out of 4. It's a start. But I really want a clean, nice design. Reading Text files isn't fun.
+4 out of 5 is normally good enough. But the styling is a huge zero. I really want a clean, nice design. Reading Text files isn't fun. It looks lazy.
 
-Let's try to build on this. We want a nicer appearance. What if we used Powerpoint or Word instead of Text files? 
+Let's try to build on this start. We just need want a nicer appearance. What if we used Powerpoint or Word instead of Text files? 
 
 * __Get writing out to the world?__
-  Fail. Now we are requiring our reader have special software. If you don't you're screwed.
-  Ever looked at one of those files using just a basic editor? Good luck.
-  TODO image of word binary
-  Then there's possible compatibility issues if they have Word 2008, or LibreOffice and you wrote it on Word Super Deluxe Edition. Is it all screwed up? 
-  What features can you use and still reach most people?
-  Finally, I have to download and open your possibly virus-ladden file... Hard pass.
+  <span class='fail'>Fail.</span> 
+  
+  1. Now we are requiring our reader have special software. If you don't you're screwed.
+	 Ever looked at one of those files using just a basic editor? Good luck.
+	 ![Well that was clear...]({{ "/images/2018-01-14-Thoughts-on-frameworks/RawWordDocViewed.jpg"}})
+
+  2. Then there's possible compatibility issues if they have Word 2008, or LibreOffice and you wrote it on Word Super Deluxe Edition. Is it all screwed up? 
+     What features can you use and still reach most people?
+  
+  3. I have to download and open your possibly virus-ladden file... Hard pass.
   
 No point going on from here. 
 
-So how about HTML and CSS? They're both basically Text files.
+So how about HTML and CSS? They're both just Text files that have been given some structure.
 
 * __Get writing out to the world?__
+
   Check. You can structure the document and serve it to anyone with a web browser. Not too shabby, that's several billion 
-  people. Anyone with a modern browser is going to be good to go. Even if they don't you can kind of read an HTML file in a text editor. Not fun but doable. 
+  people. Anyone with a modern browser is going to be good to go. Even if they don't you can kind of read an HTML file in a text editor.
+  ![Not fun but doable.]({{ "/images/2018-01-14-Thoughts-on-frameworks/RawHTMLDocViewed.jpg"}})
+* Cheap?
+
+  Check.
 * Looks good?
+
   Check. CSS will let me do anything design-wise I could want. I'm just limited by my poor design sense. Tough to work around that.
 * Fast?
+
   Check. I'm just serving up words, an occasional image, some Javascript if I'm feeling frisky and want some interactivity.
 * Lot of maintenance?
+
   Maybe. Finally we're left with time spent on non-writing tasks. Things like maintaining, or changing the look and feel. Here we have a problem. Let's imagine I 
   want to change the header (top line above every page) to read "Mike's Awesome and Humble Thoughts". I have to edit every page I've written. That boring, but straightforward. 
   Maybe its worth accepting, but I'm looking at this blog as something I'll use for years. A little change here and there over that time adds up to a lot of me doing 
   idiot work. Plus, everything I've been taught and read teaches DRY (Don't repeat yourself). So I need a fix.
 
-Some way to just write everything other than the 
-blog article's content in one place, once. Great news, I'm not the first person with this problem. We're looking for a templating engine. 
+I'm calling this 4.5 of of 5. We're making progress. We just need some way to write everything other than the 
+blog article's content in one place, once and only once. Great news, I'm not the first person with this problem. We're looking for a templating engine. 
 
 
 This blog runs off of Jekyll https://jekyllrb.com/. It's a static website generator. 
