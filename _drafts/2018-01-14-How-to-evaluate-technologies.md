@@ -5,11 +5,14 @@ date:   2018-01-14 07:26:55 -0700
 ---
 
 <style>
-.check{
+.pass{
 	color: green;
 }
 .fail{
 	color: red;
+}
+.partialCredit{
+	color: orange;
 }
 
 li > :first-child{
@@ -36,19 +39,19 @@ This blog is a solution to a problem. So my problem statement is:
 So an ideal solution hits these points:
 * __Get writing out to the world?__
 
-  <span class='check'>Check.</span> Reaches every human being 
+  <span class='pass'>Pass.</span> Reaches every human being 
 * Affordable?
 
-  <span class='check'>Check.</span> Free!
+  <span class='pass'>Pass.</span> Free!
 * Looks good?
 
-  <span class='check'>Check.</span> Looking good is objective, but let's define it as most people saying its not bad.
+  <span class='pass'>Pass.</span> Looking good is objective, but let's define it as most people saying its not bad.
 * Fast?
 
-  <span class='check'>Check.</span> Sends only my article across the wire (can't do better than that)
+  <span class='pass'>Pass.</span> Sends only my article across the wire (can't do better than that)
 * Few non-writing tasks?
 
-  <span class='check'>Check.</span> Requires no maintenance to keep running. Big changes are easy. 
+  <span class='pass'>Pass.</span> Requires no maintenance to keep running. Big changes are easy. 
 
 Obviously these criteria conflict and we will have to make some tradeoffs. We also aren't putting concrete metrics to things like "Affordable". But this is a 
 toy problem. So cut me some slack. I don't want to bludgeon you with a 20 page post.
@@ -56,19 +59,37 @@ toy problem. So cut me some slack. I don't want to bludgeon you with a 20 page p
 # Defining technologies
 
 The word technology comes loaded with the imagery of whatever is the current state of the art. We think computers. Cell phones. Maybe VR.
-I want to broaden the perception. Imagine someone attempting to get the word out at various points in history. Different things would be promising. 
-Even something as simple as getting above a crowd via a soap box. Suddenly your voice carries further as its not muffled by 
-blocking bodies. Or a cone you can speak into, concentrating the direction of your message. I can just talk, not yell! 
+I want to broaden that perception before we proceed. 
 
-Paper at one point was cutting edge. I don't need lamb skin? Or a stone? The written word and the ability to record at all versus repeating myself to 
-every new person or group? Miraculous. These still apply, because they're all still solutions to our problem. They just have different times when 
-they represent a good fit.
+![Tech perception]({{ "/images/2018-01-14-Thoughts-on-frameworks/techPerception.jpg"}})
 
-We adopt or create technologies to solve problems. So in my definition its any tool or technique used to address a problem. 
+Imagine someone attempting to get the word out at various points in history. Different things would be promising. 
+A simple soapbox allows you to elevate yourself above a crowd. Your voice carries further as its not 
+muffled by blocking bodies. Or a cone concentrates the direction of your voice as you speak 
+into it. You can just talk, not yell! 
+
+![Still tech]({{ "/images/2018-01-14-Thoughts-on-frameworks/megaPhone.jpg"}})
+
+Picture yourself speaking at a conference. The techs are running around nervously. The microphones aren't working. We're 5 
+minutes from starting... but there are only 20 people in the room. 
+
+![Not a great attendance]({{ "/images/2018-01-14-Thoughts-on-frameworks/emptyAuditorium.jpg"}})
+
+You'd probably prefer to just ask everyone to move to the front row and address them from 
+the stage. The PA system might start working, but pop and hiss occassionally. Why bother with it? Its not necessary. You aren't getting anything from it. Just 
+added complexity. And those techs are sweating and running around. Why not make their life easier? "Relax guys we're fine". But if 
+suddenly hundreds more people crowd in at the last minute.
+
+![Not a great attendance]({{ "/images/2018-01-14-Thoughts-on-frameworks/standingRoomOnly.jpg"}})
+
+Better try to get those mics working again fellas... Our environment changed, resulting in a changed problem. 
+
+The ideal solution depends entirely on your unique problem. What do you value and optimize for? So a technology is tool or technique we adopt or create to 
+address a problem. 
 
 I also want to tease apart certain technologies that we group by default. For example: if you are using HTML its assumed you are using a computer and a browser. 
 That's the reference implementation. However, you could use it independently. It's a display and layout technology. One can imagine receiving telegrams with 
-HTML and CSS. Based on that you start drawing the described page, following the HTML and CSS specs to create a final rendering. Who wants to do that? No 
+HTML and CSS. You start furiously drawing the described page, flipping through the HTML and CSS specs to create a final rendering. Who wants to do that? No 
 one if you can feed it into a browser instead of doing it painstakingly. But its important to recognize that it is independent of its how its typically found. 
 Since it is, we can use it in other contexts than web browsing.
 
@@ -76,77 +97,97 @@ Since it is, we can use it in other contexts than web browsing.
 
 How should we implement this solution we are calling a blog?
 
-We can immediately discard any ideas that exist in the "physical" world. Sending out unsolicited mass mail would be expensive and wasteful. Holding a talk on each 
-blog post? No one's showing up for that. Each topic is only going to appeal to a small % of the population. To reach an appreciable audience requires being accessible 
-far beyond my immediate geography. Ok, so no need to waste more time here. 
+### Exploring physical solutions
+
+We can quickly discard any ideas that exist in the "physical" world. Sending out unsolicited mass mail would be expensive and wasteful. 
+![Oh, an article on Javascript! Thanks! I'll put that right in the trash]({{ "/images/2018-01-14-Thoughts-on-frameworks/OhMailForMeThanks.jpg"}})
+
+Holding a talk on each blog post? No one's showing up for that. A topic may only going to appeal to a small % of the population. To reach an appreciable, interested audience requires 
+being accessible far beyond my immediate geography. Ok, so no need to waste more time here. 
 
 Stick with me, this seem pedantic, but we're moving in a direction. Namely, we've evaluated a family of solutions in respect to our problem. Do they look 
 promising? If so, we drill down. Since they don't we move on. 
+
+### Exploring digital alternatives
+
+#### Simple text file solution
 
 To meet our cost concern the Internet seems promising. Distribution is relatively cheap. The simplest thing would be just putting a bunch of txt files up on a server. 
 
 * __Get writing out to the world?__
 
-  Check. Anyone with a computer. They can use their browser to view the files. Or they can download them with a 
-  utility like WGET. 
-  Text files are simple. No formatting, so no requirements on special software.
+  <span class='pass'>Pass.</span> Anyone with a computer. Its tough to reach more people when you're going digitally :) 
+  They can use their browser to view the files. Or they can download them with a 
+  utility like WGET. Text files are simple. No formatting, so no requirements on special software.
 * Cheap?
 
-  Check.  
+  <span class='pass'>Pass.</span>  
 * Looks good?
 
-  Fail. You can do a lot of things with ASCII, but the art, tables, and diagrams are more impressive 
+  <span class='fail'>Fail.</span> You can do a lot of things with ASCII, but the art, tables, and diagrams are more impressive 
   because you're making due with so little, than impressive for their own sake.
 * Fast?
 
-  Check. The best!
+  <span class='pass'>Pass.</span> The best!
 * Lot of maintenance?
 
-  Nope. Couldn't be a simpler setup.
+  <span class='pass'>Pass.</span> Couldn't be a simpler setup.
   
 4 out of 5 is normally good enough. But the styling is a huge zero. I really want a clean, nice design. Reading Text files isn't fun. It looks lazy.
+
+#### A richer file format solution
 
 Let's try to build on this start. We just need want a nicer appearance. What if we used Powerpoint or Word instead of Text files? 
 
 * __Get writing out to the world?__
+
   <span class='fail'>Fail.</span> 
   
   1. Now we are requiring our reader have special software. If you don't you're screwed.
 	 Ever looked at one of those files using just a basic editor? Good luck.
 	 ![Well that was clear...]({{ "/images/2018-01-14-Thoughts-on-frameworks/RawWordDocViewed.jpg"}})
 
+	 
   2. Then there's possible compatibility issues if they have Word 2008, or LibreOffice and you wrote it on Word Super Deluxe Edition. Is it all screwed up? 
      What features can you use and still reach most people?
+  
   
   3. I have to download and open your possibly virus-ladden file... Hard pass.
   
 No point going on from here. 
 
+#### HTML/CSS solution
+
 So how about HTML and CSS? They're both just Text files that have been given some structure.
 
 * __Get writing out to the world?__
 
-  Check. You can structure the document and serve it to anyone with a web browser. Not too shabby, that's several billion 
+  <span class='pass'>Pass.</span> You can structure the document and serve it to anyone with a web browser. Not too shabby, that's several billion 
   people. Anyone with a modern browser is going to be good to go. Even if they don't you can kind of read an HTML file in a text editor.
   ![Not fun but doable.]({{ "/images/2018-01-14-Thoughts-on-frameworks/RawHTMLDocViewed.jpg"}})
 * Cheap?
 
-  Check.
+  <span class='pass'>Pass.</span>
 * Looks good?
 
-  Check. CSS will let me do anything design-wise I could want. I'm just limited by my poor design sense. Tough to work around that.
+  <span class='pass'>Pass.</span> CSS will let me do anything design-wise I could want. I'm just limited by my poor design sense. Tough to work around that.
 * Fast?
 
-  Check. I'm just serving up words, an occasional image, some Javascript if I'm feeling frisky and want some interactivity.
+  <span class='pass'>Pass.</span> I'm just serving up words, an occasional image, some Javascript if I'm feeling frisky and want some interactivity.
 * Lot of maintenance?
 
-  Maybe. Finally we're left with time spent on non-writing tasks. Things like maintaining, or changing the look and feel. Here we have a problem. Let's imagine I 
+  <span class='partialCredit'>Ehhh. Maybe?</span> Finally we're left with time spent on non-writing tasks. Things like maintaining, or changing the look and feel. Here we have a problem. Let's imagine I 
   want to change the header (top line above every page) to read "Mike's Awesome and Humble Thoughts". I have to edit every page I've written. That boring, but straightforward. 
   Maybe its worth accepting, but I'm looking at this blog as something I'll use for years. A little change here and there over that time adds up to a lot of me doing 
   idiot work. Plus, everything I've been taught and read teaches DRY (Don't repeat yourself). So I need a fix.
 
 I'm calling this 4.5 of of 5. We're making progress. We just need some way to write everything other than the 
 blog article's content in one place, once and only once. Great news, I'm not the first person with this problem. We're looking for a templating engine. 
+
+
+-----------------
+
+
 
 
 This blog runs off of Jekyll https://jekyllrb.com/. It's a static website generator. 
