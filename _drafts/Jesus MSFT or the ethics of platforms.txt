@@ -1,0 +1,162 @@
+So I installed the new Windows Fall Creator update. I have no idea what the supposed benefits are.
+So far what I've observed:
+-Install was slow even by Windows Update standards. Over an hour!
+-Now my computer gets a sweet plaid pattern when it come back up from standby.
+-Other goodies include 30-45 (!) more seconds to go from cold boot -> logged in and responsive
+-When I checked my app bar I see this:
+WTF
+nearly a GB of shit installed on my machine that I didn't ask for... How is this different than going 
+ahead and installing a custom browser toolbar full of spyware ala sourceforge.
+-Super scummy
+-MSFT makes billions. Isn't that enough? This has the feel of a millionaire standing in line arguing with a 
+cashier for 5 minutes about a 25 cents off coupon that won't go through. Some people might say, well that's how
+you get rich, watching every penny. No, failure to prioritize your valuable time (and imposing on others waiting behind you in line) isn't 
+how anyone ever got rich. 
+-I'm actually embarrassed for them. This is just so bush league. It's the kind of behavior you expect out of a freemium
+cellphone app company. Oh, 5 different banner ads and a couple of nagging messages about microtransactions before I can do 
+anything. Ugh. Well I know what free means. But MSFT has an actual brand, business model, smart group of people working there, 
+and yet somehow this is what results.
+
+-There's been a lot of talk about the ethics of self driving cars recently. Should they prioritize the driver's life? What if its a choice between a 
+bus load of kids and a 75 year old driver? Before we tackle that actual quandry, lets start working on the lower hanging fruit.
+How about the ethics of platforms? How much disclosure is required on how you are collecting, using, and 
+reselling data? How much information are you allowed to collect? How radically can companies change the terms of use 
+and features of something a consumer has already bought (they have a sunk cost in this platform and are more likely as such 
+to accept worse behavior that they normally would)?
+https://techcrunch.com/2017/12/08/apples-widened-ban-on-templated-apps-is-wiping-small-businesses-from-the-app-store/
+Companies like WhatsApp and Instagram aren't selling for billions because of their radical genius designs or ideas. They're selling 
+to acquire a group of consumers, who are developing a habitual inertia. "Every morning I wake up and check my SnapChat as I make breakfast." 
+And then 
+one day you start trying to monetize the shit out of them. Possibly without telling them. If it doesn't result in outrage, that just means you 
+aren't going far enough. Even if you do inform consumers they're unlikely to read the details, especially if you smash it in a big legal 
+jargon licence. They might see a summary post and comment on it with a few angry emoticons, but they probably stick with their habit.
+Its a sad state of affairs for consumers. 
+
+--This is how you piss consumers off. I realize this doesn't matter as you have a monopoly on desktop OS, but it should. 
+I like the Surface. I would never buy it though, because fuck you. I'll give my money to someone else. Hololens looks 
+reasonably cool. Again, fuck you. Now I have no illusions, Google, Apple, Facebook, and everyone else is trying to deeply entrench 
+themselves so you can never escape the loving embrace of their platform. The thing is, I have realistic alternatives there. 
+In a world with a government less concerned with appeasing corporations (just think, they might share some of the money 
+we give them with us! Or maybe hire us!) this kind of shit would lead to consumer protections being enacted. I can't wait 
+to see if Europe goes after this.
+
+>Political
+This is going to sound like some kind of commie leftists manifest, but its anything but. I believe capitalism is the most practical system devised
+by man. However, I do not believe we have an appropriate understanding of the incentive structure and in economics incentizes are all important. 
+What follows is not an attempt to assign moral judgements, just to observe the trends. We will start with simple concepts and try to build to logical 
+conclusions.
+
+An overview of the points that I am trying to establish:
+1) Job creation ultimately results from consumer demand, not corporate decision making / allocations.
+2) All corporations aim towards a final monopolistic state. Whether they can achieve it or not varies by sector, competency, regulatory oversight, 
+and luck. But the desired direction is towards a monopoly. This is neither morally good or bad.
+3) Corporations make for a very convenient representation of the broader economy. Politicians love this. "The Dow is over 22,000! Record profits are 
+being generated. Things are great! I can count on your vote, right?"
+4) Large, sustained profits represent a condition that is likely hostile long term to consumer interests. 
+
+It's understandable that the prevailing notion in American politics is that companies bring jobs. After all, who do we apply to for employment 
+(barring local/state/federal jobs)? 
+This simple argument has warped our policy action into a constant negotiation on how best to keep them happy. If they're happy, they might hire us! Or 
+give us raises! Trickle down economics am I right? 
+
+I believe a more nuanced view is companies organize to respond to the real wants, needs, and desires of consumers. A company
+addresses a need in the marketplace. Maybe they can do something slightly better or cheaper than an existing alternative. (I bred these cows 
+to produce 25% more milk. I can therefor sell milk cheaper, which helps fulfills your need for food). Perhaps its an entirely new 
+category. (I have this new thing called a video game. You don't know you want it, but trust me. It's going to fulfill your desire for entertainment
+better than that board game). Why do they do this? To increase the funds the owners of the company have to fulfill their own wants. This is a 
+perfectly reasonable motive. We might tack on to effect some change or vision on the world. Employees have similar motives, wanting to trade labor for 
+their own desires. 
+
+Let's dismiss the intangible passion aspect, the underlying impetus is to generate a profit by filling a market niche. 
+Being smart and innovative is tough. Imagine being offered a job where you'd work your ass off every day and barely make ends meet OR 
+barely work and make a fortune. That's every business' goal. Nothing could be more natural or apparent. 
+
+How do you do reach economic nirvana? Company A could dramatically outpace its competitors, bringing something to market that's years beyond what the competitors have. 
+That's the societally ideal way for someone to generate huge profits. It's also incredibly difficult to maintain a superior technology or manufacturing process.
+Other companies will enter the space upon seeing the profits. Existing competitors will attempt to duplicate your work. If they are successful 
+they will cut into  reduce the overall profits. Price will be closer to the cost of production representing a better value for consumers. If Company A can
+maintain their lead in spite of the pressure we're all better off for it, as they're doing something no one else in the market can do. The product would not 
+exist without them. I'll call this a desirable monopoly.
+
+The other way is to lock in your customer. Either make sure you are the only provider (via mergers or buyouts of competitors) or the only palatable one. 
+Imagine a customer with John Deere custom infrastructure, parts, tools, etc.  The cost of changing brands and buying a Ford tractor would be tough to swallow.
+The amount you would spend on acquiring supporting materials (non revenue generating objects, in this case anything other than the tractor) could be a significant
+amount of your total budget, meaning you get less crop production per dollar spent. Let's call this an undesirable monopoly.
+
+Its important to note that these strategies can co-exist within a company or even product. A company may have business areas where it makes large profits based on
+technological superiority and others where its locked in. Similiarly, a given product might also have both aspects. Take the tractor. Perhaps the GPS based automation 
+and tracking is remarkable. Its a major selling point you can't get anywhere else and believe you me, the price reflects it. However, the engine is generic off the 
+shelf motor. Customers could easily get the parts and do their own repairs, but doing so means tearing a seal, which voids the entire tractor's warranty. That 
+increases the likehood of them bringing it in for repairs at a certified dealership, that uses certified parts (which cost 3X what the identical part would cost
+if you bought it elsewhere).
+
+Let's address the undesirable monopoly. They are making a large profit, but not off of any aspect that brings value to the consumer. Rather its a result of 
+some market inefficieny they've created that keeps them as customers. As such, their purchase is not dependent on you being 
+state of the art. Often this means they don't need to employ as many people. People are after all a cost 
+and if you can minimize a cost you should. Plus, there's no one you're competing with, so you can 
+cut down to a skeleton staff and coast. In the tractor example it's a mixed bag employment-wise. You'd lose jobs in the engine design and assembly departments, 
+but gain them in repairs. In other cases, there's less balance (Citigroup).
+
+If some upstart company comes along, just buy them out with the huge profits being thrown off of the business
+while they're still small. You can even offer a big premium to their current value. The upstart will face considerable pressure to sell. The shareholders have
+the decision of persuing the market against you (with greater earnings possible, but the possibility of failing) OR eliminating that execution risk to make a
+quick profit. As an example: Imagine a dominant lawn mower company, BigLawnCo, who controls 80% of the $1 billion (revenue) market. A scrappy young company, 
+SmartLawns has begun to pick up steam. They've got 8% of the market. Last year they had 2%, so they are growing rapidly. A hypothetical valuation 
+for them might be 2XRevenue (or $160 million). 
+You offer them $300 million. Now the SmartLawns people have to weigh the future growth they MAY achieve vs the chances that they don't perform. Maybe their lawn
+mower design for next year has a flaw that results in a recall. Or a supplier of a crucial part goes out of business. Then they might grab only 4% of the market next 
+year. In contrast, your offer gives them a valuation TODAY of what they would be worth if they nearly doubled their business next year. This would be excellent execution,
+most businesses would kill to perform like this. SmartLawns is very likely to sell. You might say BigLawnCo overpaid. But what they actually did was remove 
+a competitor from the landscape so they could continue to capitalize on their monopoly.   You could also temporarily cut prices to drive them out of business. 
+>
+The obvious issue is that the consumer's desires (a robust marketplace, with many competitive options) is the direct opposite of the corporate dream (no competition,
+huge profits, minimal costs). 
+>
+>> Dilution of purpose (shareholders, consumers, etc. not focused and powerful like corporations, makes representing their issues difficult.)
+
+And while yes, you represent the owners, you are really a fictious legal entity created to limit liability. You're overseen by a Board of Directors who 
+monitor management. Typically management recommends BOD compensation and vice-versa (yes, really). Shareholder represent a diluted party. So long as you 
+turn consistent, growing profits they tend to not concentrate enough to effect change. You can actually entirely ignore their wishes at times (see for example
+non binding referendums on pay). If the shareholder's sue, the company picks up the bill to defend management/board decisions. Arguably the right thing, but look
+at the incentives. Why not push the envelope. It either goes through, or you get represented in court for free. The companies (and hence management's)
+stated goal is to maximize shareholder value within the limits of the law. If that doesn't sound like a recipe for disaster, what does? It's difficult 
+to generalize across a huge universe of entities, but follow me along this train of thought. There is a stated goal to maximize profits. There is nothing
+distinctly American about any of these entities. Certain executives or shareholders may want to have things like US employment/factories prioritized, but 
+there will be a general trend toward the minimization of cost and maximizing of profit. Activist shareholders virtually ensure it. Now, you always want the 
+appearance of being "American Made, American Proud!", it's valuable marketing. GM loves to be considered America's motor. But let's be real,
+if they could save money by fucking us over, they can and will. I think most people intuitively have some understanding of this, but our dialog has been warped by how effective 
+money can be in politics. I'm equally embarrassed when I learn how little it seems to take to bribe Congressman and Senators. A couple million
+an election cycle can lead to legislation that greatly increases profits. Why wouldn't they do that? Financially it makes sense. Its a good investment.
+
+So we have this dynamic where the consumer takes it in the shorts. We aren't a concentrated entity. We're diffuse. Its difficult to get equal time with 
+lawmakers. By comparison, look at China. They do many things wrong, but one thing they recognize is the value of their consumers. Their demands of 
+foreign corporations are remarkable. They have to partner with local firms. Local firms that are clearly attempting to steal their intellectual property. And you 
+better hire X number of locals. Also, this is going to sound distinctly unAmerican, but would you mind filtering your search results? Ok, thanks. They 
+realize they have something that companies want, consumers with desires/needs. They aren't afraid to play hardball. The companies suck it up, because 
+its still money. If they believed they could bribe the Chinese government to ultimately make more money as a result, they absolutely will.
+
+--How much of my hour was devoted to Micky Mouse being installed? And there are how many Windows consumers out there? 100 million? 
+Let's be conservative and say the garbage is only 5 minutes of the hour install. So as a society we're going to kill 
+5 million hours so MSFT can make... 40 million? 100 million? I can't imagine its worth much more to put bloatware on people's computers.
+--How much to sell the information you're no doubt collecting on me? Can I get a price sheet on fucking over users?
+--What do I get out of this fantastic update? More Siri datamining features? More telemetry I can't turn off? I haven't seen a single
+feature I actually want. 
+
+I want a fucking operating system from you. I was security updates. I'm buying an OS and 
+access to the Windows API. I want NOTHING more. If you would like to 
+suggest certain features ("MSFT likes to scout the very best games. Would you like to try our hand picked selection?" or "Siri can enable extremely
+cool voice commands! How about installing her and giving it a spin :) ?" ). That's great. I might even try. But as it stands I just see it 
+as keylogging you're forcing on me. I actively feel like my property is being violated. I'm sure it all falls within whatever overly ambitious,
+legally unenforceable, nightmare of a licence you've doctored up, but let me spell out my expectations:
+1) You don't have the right to make whatever changes you'd like to my machine. Within the realms I opt into, fine. But I need visibility into what's 
+happening. 
+2) When you push all your shit so hard my instinct is and always will be fuck you. It may be great. But my expectation (based on experience with Windows)
+is its just going to be another product you use to abusively upsell me on other MSFT crap or suck more value out of my use. So to hell with that. 
+Edge? No. OneDrive? Are you high? The MSFT app store? Yeah, I'd love to lock myself into ecosystem a little more.
+<Borat NOT joke>
+I know you won't, but consider what may happen. This is the same monopolistic shit that should have gotten you broken up 20 years ago. 
+You have a very profitable OS. You have a lucrative Office suite. Accept that and continue to milk it. Compete fairly in the other arenas assholes. 
+
+--I should be able to see EVERY piece of data that is sent back to you. I should be able to say yea or nay to it. The idea that I'm going 
+to trust you with all aspects of my life. And moreover, trust you to be ethical, when you behave obnoxiously on the little stuff... get the fuck 
+out.
