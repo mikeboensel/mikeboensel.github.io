@@ -117,9 +117,11 @@ imageFolder: "/images/2018-01-19-modular-mult"
   
 <figure>
 	<img src='{{ page.imageFolder}}/Spirograph.jpg'>
-    <figcaption>
+    <figcaption class="centeredSubContent"> Spiffy!
 </figcaption>
 </figure>  
+
+<br>
 
 <figure>
 	<img src='{{ page.imageFolder}}/Beauty.jpg'>
