@@ -1,0 +1,392 @@
+<html>
+<head>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+Abstraction is king. It's the reason there are stories like Instagram where 3 guys built an app used by millions
+in a few weeks. There's too much complexity, too much repetition, too much tedium to think about everything that
+the computer is doing. Nothing would ever get done. We want to spend the majority of our time working in our <b>problem's
+    domain</b>.
+
+<h1>Problem domain</h1>
+This is the functionality you are trying to create, what at the end of the day you show people.
+<br>
+
+<figure style="float: left">
+    <img src="Tetris%20-%20Blank.jpg" style="height: 200px;width: auto;" alt="">
+</figure>
+<p>
+
+    <br>
+    For example, you're recreating Tetris.
+    <br>
+    You're interested in thinking about the game. The design of the game is what you want to be
+    working on.
+<ul>
+    <li>How do the pieces move?</li>
+    <li>What shapes are there?</li>
+    <li>What sounds/animation should play?</li>
+    <li>Should there be a secret bonus level?</li>
+    <li>How many points does clearing a line give you?</li>
+</ul>
+
+</p>
+
+<br><br><br>
+
+
+Everything outside of these core issues should fade into the background. In your ideal world you just issue a command to
+the computer like:
+<blockquote><code>Create a green block at the top middle of the screen</code></blockquote>
+<br>
+This simple operation will result in thousands of actions the computer must take. Just spitballing at a high level:
+<ol>
+    <li>Find the Tetris windows location on the screen</li>
+    <li>Figure out what pixels correspond to the top middle of the window</li>
+    <li>Create a block and keep track of it in memory</li>
+    <li>Is the Tetris window covered by another programs window? If so we only display part (or none) of the block</li>
+    <li>Make changes to the screen's video buffer to show the block</li>
+    <li>Send the buffer on to the screen</li>
+</ol>
+Each of these items would break down into hundreds of smaller operations. You're making a game and interested in the
+block,
+not all this clutter. This is all mental overhead that results from using a computer. We want it to just happen. We
+don't
+want to reinvent the wheel, your Tetris game's progress would grind to a halt.
+You'd spend all your time creating a way to display things on the screen and make a lot of mistakes in the process.
+<br>
+A 5PM conversation with the boss would look like this:
+<br>
+<pre>
+Boss: So what do we have so far?
+You: Well things are coming along... a bit slowly. But we're getting there.
+B: Great, how about a quick peek?
+Y: Uh, sure.
+B: So why's it flickering and jumping around? I thought we were making Tetris?
+Y: Oh, we are. I'm just working out a few bugs. It's really coming together. Three days ago we didn't even have flickering.
+B: Well tomorrow's another day. For some of us.
+</pre>
+<br>
+Reducing this burden of knowledge and effort is what we refer to when we talk about abstraction. Someone else has
+already
+spent time developing a way of displaying things on the screen. Let's use that and let it handle all the messy details.
+Common names you'll hear for abstractions are libraries (APIs), runtimes, platforms, or modules. For example: The
+Android Platform.
+The Windows API. The C# Runtime. The Java Runtime Environment. The DirectX Library. These are all solving different
+problems for us.
+Great, right?
+
+<h1>Your abstraction is leaking...</h1>
+The problem is all abstractions leak. Leaking means details that are specific to the problem domain of the abstraction
+(the graphical display problem domain, not our Tetris domain) end up littered all over our Tetris project.
+<br>
+Its important to note, the abstractions aren't leaking because the creators are bad, lazy, dumb, etc. Although they do
+sometimes
+make mistakes abstractions are general purpose tool we are using to solve our application's specific problem. This will
+almost
+always require some level of customization to fit your use case. That's just the nature of using a general purpose tools
+(as opposed to something you wrote specifically for your game, as many game engines were initially written to create a
+specific game, then generalized for other people's use later (Doom, Unreal, Quake, etc))
+
+<br>
+Enough theory! Lets look at what our nice clean desired command <code>Create a green block at the top middle of the
+    screen</code>
+might look like:
+<br>
+<blockquote>
+<pre>
+Canvas canvas = new Canvas(400, 800);
+canvas.display();
+Rectangle r = canvas.createRectangle(25, 25);
+r.x = 200;
+r.y =  100;
+r.fill(#00FF00);
+canvas.update();
+</pre>
+</blockquote>
+<br>
+
+<h2>How did we arrive here....this is terrible</h2>
+I realize this is early in our journeys and may be overwhelming. I'll explain everything, don't
+worry. What's great about the code above is it displays multiple layers of abstraction, all leaking.
+<br>
+Let's break it down in English. First we will discuss what it does. Next we will talk about why code is such terrible
+semi-English.
+<ol>
+    <li><code>Canvas canvas = new Canvas(400, 800);</code>
+
+        <p>We create a new Canvas. The graphics abstraction we are using requires us to first create an area we can
+            "paint"
+            that will be displayed on the screen. This is reasonable, although we might just want to paint our entire
+            window,
+            in which case this is an annoying additional step. The canvas will be 400 pixels wide X 800 pixels tall.
+        </p>
+    </li>
+    <li><code>canvas.display();</code>
+
+        <p>We have to tell the abstraction to write to the screen the first time. It now displays an empty window pane.
+            Again, this is not something we want. "My game is awesome! Look at this empty starting screen!"
+            So its more steps that don't deal with creating awesome Tetris, but instead with managing the graphics
+            abstraction.</p>
+    </li>
+    <li><code>Rectangle r = canvas.createRectangle(25, 25);</code>
+
+        <p>We create a rectangle that is 25 pixels X 25 pixels. We give it a unique name of r. We can use this name to
+            tell it to do things.</p>
+    </li>
+    <li><code>r.x = 200;</code>
+
+        <p>If we don't specify where the block should go the abstraction puts it in the bottom left corner.
+            That's not what we want. So lets center it (by dividing our 400 pixel width by 2)</p>
+    </li>
+    <li><code>r.y = 100;</code>
+
+        <p>We want our block at the top of the Tetris screen (blocks start at the top and fall down). Here we run into a
+            big obstacle. Many graphical abstraction have a coordinate system that has height counting down from the
+            top. This
+            is very different than the XY origin we learn in school and a pain to think in terms of. More unnecessary
+            complexity for our poor Tetris game
+            <figure style="float: left">
+                <img src="Tetris%20-%20Axis%20Normal.jpg" alt="" height="300" width="auto">
+                <figcaption>Coordinate axis as God intended them</figcaption>
+            </figure>
+            <figure>
+                <img src="Tetris%20-%20Axis%20Abomination.jpg" alt="" height="317" width="auto">
+                <figcaption>The abomination every graphics library uses</figcaption>
+            </figure>
+        </p>
+    </li>
+    <br>
+    <li><code>r.fill(#00FF00);</code>
+
+        <p>The block is not green by default. We have to set it as such. The #00FF00 is expressing color in hexadecimal.
+            (TODO link)
+            2 digits represent Red, Green, and Blue. By mixing these many colors can be created. We have 0 Red and Blue.
+            We have as
+            much green as possible ("FF")</p>
+    </li>
+    <li><code>canvas.update();</code>
+
+        <p>
+            Draw calls (instructions that write to the screen) are expensive. They take a lot of time and work. So until
+            we make this call nothing changes on the screen. Another annoyance. As Tetris designers we don't want to
+            manage
+            this. We just want to keep track of our pieces and run the game. Displaying wasn't supposed to be handled by
+            us...
+            However, the graphical abstraction doesn't know anything about our Tetris game and these operations are
+            expensive, so
+            it relies on us to say when drawing to the screen is appropriate.
+        </p>
+    </li>
+</ol>
+<br>
+
+<h2>Abstraction bonus round!</h2>
+
+<p>You're in luck. The graphical abstraction wasn't the only one we were working with! Additionally, if you've never
+    programmed
+    before everything above would look bizarre. Programming languages are an abstraction over the basic
+    functions
+    that the computer offers us. They're a few steps up and a dramatic improvement from the raw binary you see all the
+    movie
+    hackers looking at.
+</p>
+
+<figure>
+    <img src="LeetHackerBinary.jpg" alt="">
+    <figcaption>I'm a binary speed reader. I can read 4 lines an hour. (No one views code like this)</figcaption>
+</figure>
+
+<br><br>
+Some sample code:
+<blockquote>
+<pre>
+    int i = 1+2;
+</pre>
+</blockquote>
+
+Above are performing addition and putting the resulting 3 into a variable (a box that can hold number values) called i.
+Below we have the assembly for that statement. Assembly is a direct representation of binary.
+In the future we will learn about assembly, but for now just observe how much less friendly and readable it is:
+<blockquote>
+<pre>
+    TODO return to and generate real assembly
+    push 1;
+    push 2;
+    add;
+    mov [ESP-4], rax;
+</pre>
+</blockquote>
+
+This is a very simple example. As code gets more complex the assembly gets MUCH nastier. The purpose of a programming
+language is to make
+instructing a computer easier. However, languages require rigid syntax, not the standard English statements we would
+like to use. Why?
+Primarily because interpreting English is hard. The language is ambiguous. Small changes can have dramatically different
+meanings.
+
+<blockquote>
+
+<br>
+I ran over to John's.
+<br>
+I ran over John.
+<br>
+3 letters an apostrophe are the different between a pleasant jog and vehicular homicide. Society exists on a razor's
+edge...
+</blockquote>
+
+    <br>
+Computers are becoming smarter, but still struggle. Additionally, even if they understood us perfectly, its still
+possible for us
+to be ambiguous or incomplete in our instructions. We frequently are and can get away with it because other human have
+intuition about what we mean.
+<br>
+
+<h3>Computers are DUMB</h3>
+People who don't work with computers have a perception that computers are extremely intelligent. They aren't. They do
+ANYTHING
+you tell them to. They just do it very quickly.
+
+<br>
+When thinking about programming its best to think of it as a series of instructions you are giving to an
+extremely literal (perhaps passive aggressive?) human. These instructions will be followed to the letter.
+
+<br>
+Imagine training a new bouncer at an exclusive LA night club.
+<figure>
+    <img src="NightClub.jpg" alt="" height="300" width="auto">
+</figure>
+You set him up with a stool outside the door. "Take this clipboard.
+We open at 9PM. Someone comes up to enter, stop them and get their name. If they aren't on the list, don't let them in.
+Stop
+letting people in at 1AM."
+<br>
+You walk away feeling confident. The instructions are pretty clear. This guy outta be good for the night.
+But let's explore a bit. A hipster with a man-bun approach the bouncer. His jeans are at least 2 sizes too small. He
+makes a pained
+expression. It could be the jeans or the idea of going into a non farm-to-table club.
+<!--<figure>
+    <img src="Manbun.jpg" alt="">
+    <figcaption>Don't mind me. Just thinking about Darfur. And Tibet.</figcaption>
+</figure>
+-->
+<br>
+The bouncer stops him.
+
+<figure>
+    <img src="Manbun.jpg" alt="" height="300" width="auto">
+    <img src="bouncer.jpg" alt="" height="300" width="auto">
+</figure>
+<pre>
+    Bouncer: One sec Chief. Can't let you in unless you're on the list. Name?
+    ManBun: (Long sigh) John Smith.
+    B: Sorry, not on the list.
+    MB: I meant John Travolta.
+    B: Ok, enjoy your night.
+</pre>
+
+<h4>What went wrong?</h4>
+You never said to verify the person's identity.
+<br>
+A real person would probably know what Travolta looks like. If not they would at least need to be shown a fake ID that
+had
+the persons picture and Travolta's name. However a computer
+without appropriate instructions would not.
+<figure>
+    <img src="MclovinID.jpg" alt="">
+</figure>
+Similarly, if someone stepped in and out of line giving multiple different names a real bouncer would remember their
+previous interaction and
+be suspicious. Again a computer without some instruction to remember past faces and names presented would not. This may
+seem silly
+but arises in real world situations with serious consequences. Improperly secured machines do not prevent unlimited
+password attempts.
+An attacker tries millions of passwords an hour until they find the right one. "A","B","C","D", "AD", etc.
+<br>
+If we loosened the language that could be used for programming languages it would require the computer to try to
+discover our intent. The only
+thing worse than computers blindly doing what we tell them would be them trying to decide what
+our instructions should mean. (Do you want to get a Robot Uprising? Because that's how you get a Robot Uprising)
+
+<br>
+This would be disastrous and potentially very dangerous. So we have a semi-English language
+which has very specific rules so a computer can always know how to execute what you want. So the benefit of the
+abstraction of
+higher level languages is something approaching English in terms of readability.
+<br>
+The "leaking" aspect are all the rules that restrict us. Its very apparent we are writing instructions for a computer.
+This has a big
+impact on the way a human can write and order instructions. It takes time to become comfortable.
+
+<br>
+All programming languages are attempting to maximize a tradeoff between being readable and expressive to humans AND
+being
+able to be implemented and optimized by the computer.
+
+<br>
+
+<h1>So we've sprung a leak. Where to from here?</h1>
+
+Here's the good news, you don't have to know everything to perform meaningful work (and get paid!). Actually, let me
+clarify. You
+don't have to know every detail all the time.
+<br>
+So why would I encourage you to get a sense what's under the hood? Afterall, <span class="bold"> very few teachers will tell you is that unless you are working with something
+daily, you will forget the details rapidly! </span> This is absolutely true. However, you will remember the broad
+strokes.
+
+<h1>Turning Black Boxes Gray</h1>
+
+A black box is a component that performs an operation for you, but you have no idea how it does it. You are in the dark
+(hence
+the term black). Something that is a black box will work... until one day it doesn't. And then you have to learn about
+it to repair it,
+replace it, or bring someone in. So shine some light on it in advance.
+
+<br>
+The major differentiator between the best people in this field and the rest are what happens when things go off the
+rails. Something inexplicably doesn't perform how you'd expect. What happens then? The best
+people are able to triage. When things at the surface break, they can dive in, because they know something about
+everything. More research might be required and they might have to learn more, or re-learn, but they have a basis point.
+Its not brand new. This is extremely useful.
+<br>
+
+Additionally, the boxes that we use to watch cat videos on the internet are remarkable! They represent an accumulation
+of enormous progress and learning about the underpinnings is both inspiring and illuminating. We've come to expect it
+and
+only notice when the video buffers, or drops to a lower quality setting. In short we notice when things fails, but
+largely
+dismiss it when it performs the miracles that even 20 years ago would have been unimaginable. A greater appreciation of
+everything that occurs is valuable in its own right.
+
+
+Building a house. Electrician as expert. "The electrician will handle it". Then he comes and asks you if he should use
+20 or 40 Amp breakers in the garage. Uh... how much is 20 Amps? How much more do 40 Amp breakers cost?
+I don't know you're the electrician. Well, I need to know what you're doing in there. Washers or dryers? No. Ok, any
+serious power tools? What's a serious power tool? I've got some saws... Is it a big table saw? IDK. How many HP?
+Your problem domain is cutting things. You understand the saw as such. The electrician has another level he operates at.
+He sees the saw as an electrical motor. He knows motors pull much higher currents when starting vs operating. This
+means you could trip the breakers, killing power to the garage. In this example the electrician is someone you can ask
+for explanations and he can walk you along. When programming you can't ask the computer. You have to look up
+documentation and understand the abstractions problem domain and how they solved it.
+
+<br>
+
+<br>
+Example: For the average person, their TV is a black box. It plays video when they turn it on. How's it do it? They
+probably have a hand wavey sense of signals over the air or thru the cable.
+This is fine, most of the time. Then the TV fails out of warranty. Suddenly a more nuanced understanding is the
+difference between an expensive repair bill or throwing it out and buying a new
+TV. MANY TVs fail as a result of a bad capacitor. When they fail they tend to be obviously defective, normally bulging.
+A capacitor can act as a filter or a battery. They have electrolytes (the same family
+of substances tht are in Gatorade) that dry out as they age. A new capacitor might cost $4. So why does the repairman
+charge you several hundred? He has knowledge you do not. This knowledge
+enables him to fix something of value to you. He can therefor charge something between his costs and the cost of a
+replacement TV.
+
+<br>
+
+</body>
+</html>
+
