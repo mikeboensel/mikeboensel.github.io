@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Virus scanning overview</title>
+</head>
+<body>
+Every day, sometimes multiple times, I download something (programs, PDFs, Github projects) and pop over to
+<a href="www.virustotal.com">VirusTotal</a> to scan it. VirusTotal let's you upload files and have it scanned by
+60+ AntiVirus (AV) products. It's not a fool proof solution, but it's a big step up from just using Microsoft Security
+Essentials (the Windows default).
+<br>
+As Brian Krebs <a href="https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/">has pointed out</a>
+malware authors now leverage "crypting" services. These sites sell a service where they take a customer's malware and
+run it against a large number of AVs. If its detected they modify it and rescan. They repeat this process until
+the malware is FUD (Fully UnDetectable). It will remain FUD from this point in time, until those AVs make changes to
+their detection.
+So the threats are significantly more stealthy. They've stepped up their game, using many scanners is my attempt to
+mitigate that.
+<br>
+Just a quick aside, AVs scan using a "signature" based approach. Based on past malware they've seen they create a set of
+heuristics (rules of thumb)
+that let them make a decision about any software they encounter.
+<br>
+An example: Maybe a particular virus always creates a temporary
+file called asdf.txt for instance. Most other programs won't be creating a file with that name (its just the 4 keys your
+left hand
+is on if you use the touch typing home key approach I think they still teach in school).
+This would become part of the AVs rules for determining if a file is bad. This is a blacklisting approach. You create a
+list of things that are suspicious,
+if you see enough of them in the file in question its flagged as bad.
+<br>
+Blacklisting has a number of problems:
+<ol>
+    <li>It creates false positives.
+        <p>Imagine a legit program for the Alaska State Defense Force (ASDF) creates a file asdf.txt. That MAY be
+            flagged
+            as a virus because it is similar to a characteristic of a known virus. It all depends on how heavily that
+            signature
+            is weighted and what else the program contains.</p>
+    </li>
+    <li>Blacklisting only tells you that MAYBE this file is safe
+        <p>You can write a harmful program that doesn't have any (or enough) of the signatures in it to be considered a
+            virus. Or you can take a file that would be detected and pack it (encrypt the contents and have the program
+            unpack itself
+            on running)</p></li>
+    <li>It "doesn't scale"
+        <p>People will tell you this, but neither blacklisting or whitelisting (our next topic) do. They both have
+            limitations,
+            so its a matter of what you prioritize in your approach</p></li>
+</ol>
+
+<br>
+The other possible approach is whitelisting. AV companies would determine software that is definitely safe. Everything
+else is flagged as potentially dangerous. It may or may not be, the AV company hasn't had a chance to look at it yet.
+The issue with this is:
+<ol>
+    <li>Its very slow. The AV companies become a bottleneck to all software products.
+        <p>Everytime a programmer pushes a patch, releases a new application, or makes any change that has to be
+            installed, first it has to be reviewed by the List maintainer. Millions of pieces of software are written
+            each day. Its complex and can be difficult for the people who wrote (and know the code base) to make sense
+            of.
+            Imagine how much more difficult it would be for the AV company.
+            <br>
+            The speed of reviews could be sped up if you the AV companies received the source code and compilation
+            instructions (use GCC version x on Ubuntu 14.02, etc. A virtual machine image would probably be the most appropriate way
+            to send a build environment) to generate the final artifact. Analyzing a binary is certainly doable, but its not
+            friendly. Other techniques like putting the program in a virtual machine and observing the changes it makes to the environment
+            are also from the outside looking in. A lot of malware has means of determining whether its running in a virtual environment,
+            being debugged, etc. Having the source and being able to generate the exact same artifact that the developer intends to
+            distribute makes life much easier. But it implies a HUGE amount of trust (see next point).
+        </p>
+    </li>
+    <li>It puts all the trust in the AV company to act properly.
+        <p>Imagine releasing a new photo app. There's a lot of competition. You want to get to market
+            as soon as possible. What if some of the AV companies were owned by a conglomerates, with their own photo
+            app divisions?
+            Would they "lose" your app in the pile to give themselves a head start? Users would scan your app and have
+            it come
+            back as not on the whitelist and possibly move onto the competitor
+            <br>
+            You might say this is a concern with blacklisting as well and that is true. However, it is mitigated by the
+            fact that
+            they have to create signatures to flag a competitor's file, but they don't know in advance what that file
+            will look like,
+            which makes it harder to prevent an initial push into the market.
+        </p>
+    </li>
+</ol>
+
+<br>So bottom line is the approach you take is a tradeoff. Most solutions rely on blacklisting, allowing them to return
+a verdict for any file with a lesser assurance of it actually being correct. Sometimes it fails spectacularly. Recently,
+Google's app store discovered apps that had a combined million+ downloads that
+<a href="https://arstechnica.com/information-technology/2017/09/malicious-apps-with-1-million-downloads-slip-past-google-defenses-twice/">
+    were stealing from users.</a>
+
+<br>So with that big caveat, its still better than nothing. Combined with being smart online (only downloading from
+trustworthy sources, checking hashes, looking for valid signatures, etc) its generally enough.
+
+
+</body>
+</html>
