@@ -72,6 +72,8 @@ image into the wax. And its in royal purple! Its definetely from the king.
 
 As long as our assumptions hold (the seal and envelope can't be duplicated or opened without it being obvious and the code is undecipherable) this is a perfect system.
 
+# A simple cipher
+
 Let's try to create a digital system. Let's start with encrypting our Plaintext to Ciphertext.
 
 Plaintext: <input id="plainText" oninput="calcCeasarCipher()" placeholder="Matt loves to ride the bike"
@@ -80,6 +82,57 @@ Plaintext: <input id="plainText" oninput="calcCeasarCipher()" placeholder="Matt 
 <p style="display:inline-block">Ciphertext: <p style="display:inline-block" id="cipherText"></p></p>
 
 Ultimate goal, we are going to hide our messages in the vast space of all possible messages.  
+
+
+# Quick aside on language
+So before we go any further its helpful to think about what language (and information) is fundamentally. A language imposes order and structure.
+
+## A set of characters
+
+There's a set of acceptable letters we use, the alphabet. If I'm addressing English audiences and start using Cyrillic or Arabic characters, its meaningless to 
+them. 
+
+## A dictionary of words
+From all the billions of possible combinations of letters we've arrived at a very small subset to create words. While languages do evolve over time with use and 
+different groups diverge there's a generally accepted set of words. If I just make up my own words, I'm either a crazy person, 
+trendsetter, or illiterate. If you need any proof hop on Twitter. I have no idea what "on fleck" means. I think people stopped using it, so I saved some time 
+on that one. 
+
+## Grammar
+Finally, we need some rules for how to throw all the words together. For example: most sentences need a subject and a verb. They end in a period. A paragraph 
+should be 3-5 sentences that encapsulate some thought. Etc. 
+
+## Putting it all together
+
+So that's what we have. Let's imagine another world where every possible word has a meaning. The language is uniformally distributed across all possibilities. 
+Let's examine a 4 letter word.
+[a-z][a-z][a-z][a-z]
+Each spot has 26 possiblities, so we have 26^4 (~half a million) possible words.
+
+Great, why waste our time on all these long words like "diarrhea". Let's just call it "axew". And "medicine" can be "axez". Well, suddenly a typo isn't 
+recognizable. It's just another valid word! 
+ 
+Communication is a lot closer to a crossword puzzle than you might recognize. The structure of our language lets us figure out meaning by restricting us 
+to a small space of possibilities. We intuitively do it now, but rarely recognize it. Its only when you deal with something like terrible auto-correct 
+text messages you can get a sense of what's your brain is doing under the surface. 
+
+"Bring the Doug!"
+That doesn't make much sense. "The" rarely precedes a first name. An occupation ("The king", "The doctor", etc.) sure. But unless you're a frat boy, there probably 
+isn't someone in your life named "The Doug".
+
+<figure>
+	<img src='{{ site.data.global.url }}/images/Crypto20000Ft/TheDoug.jpg'>
+    <figcaption>The Doug - Undefeated in beer pong combat</figcaption>
+</figure>
+
+So we look at context and the possibilities. Its a noun. Probably starts with a 'D'. 4 letters. "Dogs"? Do we have dogs? Do dogs make sense where we're going?
+Say its a courtroom hearing. Not so much. But if we're meeting at the park, absolutely. If so then we show up with them. It might not be the right answer, but 
+its a fair guess.
+
+When every possibility has a meaning, its much harder (and in the extreme case impossible) to error correct.
+
+This is what strong encryption does. When you attempt to reverse it, it could be EVERY possible message. You can't determine any structure from it. It's essentially 
+random. 
 
 
 
@@ -98,4 +151,6 @@ its a matter of going through each one and seeing what makes English come out of
 Let's go back to our human RNG. Imagine he's going along banging out digits. Does he repeat them very often? Probably not. "This doesn't look random, the boss
 will think I'm just holding down a key". But even long strings of a single digit, pages and pages of them, is a possibility, its just a distant one. If that never
 occurs then its a reduction of entropy. 
+
+
 
