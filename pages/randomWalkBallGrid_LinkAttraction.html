@@ -1,0 +1,207 @@
+<html>
+
+<head>
+    <script src="/libraries/p5/p5.min.js"></script>
+    <script src="/libraries/p5/addons/p5.dom.min.js"></script>
+</head>
+
+<body>
+    <p>Recreating examples in http://inconvergent.net/shepherding-random-grids/</p>
+</body>
+
+<script>
+
+    var circles = [];
+    var radius = 30;
+
+    function setup() {
+        createCanvas(900, 900);
+        stroke('rgba(0,0,0,0.29)');
+        strokeWeight(5);
+        fill("#f11");
+
+        initializeCircles();
+
+        //reset function
+        document.getElementById("defaultCanvas0").addEventListener(
+            "click",
+            function () {
+                initializeCircles();
+            }
+        );
+    }
+
+    var spacingMultiple = 8;
+
+    function initializeCircles() {
+        circles = [];
+        for (let y = radius; y < height - radius; y += spacingMultiple * radius) {
+            for (let x = radius; x < width - radius; x += spacingMultiple * radius) {
+                circles.push(createCirc(x, y, radius));
+            }
+        }
+    }
+
+    function getElesPerRow() {
+        var eles = 0;
+        //Must stay in sync with initializeCircles loop to give accurate results
+        for (let x = radius; x < width - radius; x += spacingMultiple * radius) {
+            eles++;
+        }
+        return eles;
+    }
+
+    var windowSize = 20; //How many prior measures do we keep?
+
+    function createCirc(x, y, radius) {
+        return {
+            x,
+            y,
+            radius,
+            //Initially did this with a sum on X and Y. No window. Lead to way too much dampening. Small window allows for dynamic movement.
+            x_prevs: preloadAvgWindow(x),
+            y_prevs: preloadAvgWindow(y),
+            avgNeighborPosX: 0,
+            avgNeighborPosY: 0
+        }
+    }
+
+    function preloadAvgWindow(val) {
+        var v = [];
+        for (var i = 0; i < windowSize; i++)
+            v.push(val);
+        return v;
+    }
+
+    function addPositionToCircleAvgs(x, y, circ) {
+        pushAndShiftAvg(x, circ.x_prevs);
+        pushAndShiftAvg(y, circ.y_prevs);
+    }
+
+    function pushAndShiftAvg(val, arr) {
+        arr.push(val);
+        arr.shift();
+    }
+
+    let jitterMag = .5; //Random walk motion
+    let linkAttraction = .005; //Pull from neighbor's avg position
+    function draw() {
+        background('#fff');
+        var rowSize = getElesPerRow();
+        for (var i = 0; i < circles.length; i++) {
+            var c = circles[i];
+            //draw circle
+            ellipse(c.x, c.y, c.radius, c.radius);
+
+            //4 connecting lines to draw (cardinal directions)
+            conditionalLineDraw(circles, i, DIRECTION.TOP());
+            conditionalLineDraw(circles, i, DIRECTION.RIGHT());
+            conditionalLineDraw(circles, i, DIRECTION.LEFT());
+            conditionalLineDraw(circles, i, DIRECTION.BOTTOM());
+
+            calculateNeighborAvgPos(circles, i);
+
+            stroke('rgba(0,0,255, .75)');
+            line(c.x, c.y, c.avgNeighborPosX, c.avgNeighborPosY);
+            stroke('rgba(0,0,0,0.29)');
+
+
+        }
+
+        for (var c of circles) {
+            //Random walk 
+            c.x += randomGaussian(0, jitterMag);
+            c.y += randomGaussian(0, jitterMag);
+
+            //link force. Calculate distance from avg of neighbors. Move in 
+            //that direction. Scaled by linkAttraction (<=1 converges on avg, >1 Will jitter around avg)
+            c.x += (c.avgNeighborPosX - c.x) * linkAttraction;
+            c.y += (c.avgNeighborPosY - c.y) * linkAttraction;
+
+            //Record Positions for averaging calculations
+            addPositionToCircleAvgs(c.x, c.y, c);
+
+        }
+    }
+
+    var DIRECTION = {
+        TOP: () => -getElesPerRow(),
+        RIGHT: () => 1,
+        LEFT: () => -1,
+        BOTTOM: () => getElesPerRow()
+    };
+
+    function calculateNeighborAvgPos(circles, i) {
+
+        var contributions = [];
+        contributions.push(getNeighborContribution(circles, i, DIRECTION.TOP()));
+        contributions.push(getNeighborContribution(circles, i, DIRECTION.RIGHT()));
+        contributions.push(getNeighborContribution(circles, i, DIRECTION.LEFT()));
+        contributions.push(getNeighborContribution(circles, i, DIRECTION.BOTTOM()));
+
+        var totalX = 0;
+        var totalY = 0;
+        var totalCount = 0;
+        for (c of contributions) {
+            totalX += c.x;
+            totalY += c.y;
+            totalCount += c.num;
+        }
+
+        circles[i].avgNeighborPosX = totalX / totalCount;
+        circles[i].avgNeighborPosY = totalY / totalCount;
+
+    }
+
+    function getNeighborContribution(circles, i, neighborIncrement) {
+        if (isValidNeighbor(circles, i, neighborIncrement)) {
+            var c = circles[i + neighborIncrement];
+
+            return { x: sum(c.x_prevs), y: sum(c.y_prevs), num: windowSize };
+        }
+        //invalid neighbor contributes nothing
+        return { x: 0, y: 0, num: 0 };
+    }
+
+    function sum(arr){//Maybe should be using Promises or something else. IDK. I'm on the main draw loop. Seems like it should be synchronous
+        var ret = 0;
+        for(a of arr){
+            ret += a;
+        }
+        return ret;
+    }
+
+
+    function conditionalLineDraw(circles, i, neighborIncrement) {
+
+        if (isValidNeighbor(circles, i, neighborIncrement)) {
+            var c1 = circles[i];
+            var c2 = circles[i + neighborIncrement];
+            line(c1.x, c1.y, c2.x, c2.y);
+        }
+
+    }
+
+    function isValidNeighbor(circles, i, neighborIncrement) {
+        var neighborIndex = i + neighborIncrement;
+
+        //Do we exceed boundaries?
+        if (neighborIndex < 0 || neighborIndex >= circles.length)
+            return false;
+
+        //Are we on a row boundary?
+        //Looking for right neighbor on the right edge
+        if (neighborIncrement == 1 &&
+            (neighborIndex % getElesPerRow() == 0))
+            return false;
+        //Looking for left neighbor on the left edge
+        if (neighborIncrement == -1 &&
+            ((neighborIndex + 1) % getElesPerRow() == 0))
+            return false;
+
+        return true;
+    }
+
+</script>
+
+</html>

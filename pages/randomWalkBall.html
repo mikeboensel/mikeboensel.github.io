@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script src="/libraries/p5/p5.min.js"></script>
+        <script src="/libraries/p5/addons/p5.dom.min.js"></script>
+    </head>
+    <body>
+            <p>Recreating examples in http://inconvergent.net/shepherding-random-grids/</p>
+
+    </body>
+
+    <script>
+
+    var circles = [];
+
+    function setup(){
+        createCanvas(900, 900);
+        stroke('rgba(0,0,0,0.29)');
+        strokeWeight(5);
+        var size = 30;
+        fill("#f11");
+        circles.push(createCirc(70,70, size));
+    }
+
+    function createCirc(x,y,size){
+        return {
+            x,
+            y,
+            size
+        }
+    }
+    let jitterMag = .5;
+    function draw(){
+        background('#fff');
+        for (c of circles){
+            ellipse(c.x,c.y, c.size, c.size);
+            c.x += randomGaussian(0, jitterMag);
+            c.y += randomGaussian(0, jitterMag);
+        }
+        
+    }
+    </script>
+</html>
