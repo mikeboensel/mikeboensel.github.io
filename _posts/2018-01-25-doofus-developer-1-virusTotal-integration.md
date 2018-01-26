@@ -177,12 +177,10 @@ So, in increasing order of desperation, here's what I did:
     <figcaption>Me after re-reading the same documentation for a third time</figcaption>
 </figure>
 
-<ol>
-    <li>I closed the non-admin window and reopened. Maybe it was holding onto old environment variable values? Nope.
-	</li>
-	<li>__Restart.__ Nope.
-	</li>
-    <li>I __re-read the docs__ on Execution Policy. Seemed like everything was ok. Maybe for some reason it viewed my script as being 
++ I closed the non-admin window and reopened. Maybe it was holding onto old environment variable values? Nope. 	
++ __Restart.__ Nope.
+	
+	<li>I __re-read the docs__ on Execution Policy. Seemed like everything was ok. Maybe for some reason it viewed my script as being 
 		remote and needing to be signed??? I read about how Windows tracks file and ran the <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file?view=powershell-5.1">Unblock-File commandlet</a>.
         No relief there.
     </li>
@@ -205,23 +203,65 @@ So, in increasing order of desperation, here's what I did:
 </ol>
 
 <h2 id="Solution">The last place you look</h2>
-And then I noticed a subtle difference. Can you spot it?
+And then I noticed a subtle difference. Can you spot it? The answer is on slide 3.
 
-<figure>
-	<img src='{{ page.imageFolder }}/Solution.jpg'>
-    <figcaption></figcaption>
-</figure>
+<!-- Carousel from https://www.w3schools.com/bootstrap/bootstrap_ref_js_carousel.asp 
+Modified to remove animations, auto scrolling, and large ugly side bars
+-->
+
+<div id="myCarousel" class="carousel" data-ride="carousel" data-interval="false">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+	  <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item active">
+        <img src='{{ page.imageFolder }}/Solution1.jpg'>
+        <div class="carousel-caption">
+          <h3>Working Admin shell</h3>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src='{{ page.imageFolder }}/Solution2.jpg'>
+        <div class="carousel-caption">
+          <h3>Failing non-admin shell</h3>
+		</div>
+      </div>
+	  
+	  <div class="item">
+        <img src='{{ page.imageFolder }}/Solution3.jpg'>
+        <div class="carousel-caption">
+          <h3>The key difference!</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
 
 PowerShell x86 vs PowerShell. Were they considered different applications (with different policies and settings) by the OS? Yes...
 
-<figure>
-	<img src='{{ page.imageFolder }}/SolutionAnnotated.jpg'>
-    <figcaption></figcaption>
-</figure>
 
-There are 2 PowerShells, but no God... Now everything works.
 
-The final PowerShell script:
+There are 2 PowerShells, but no God, what a world. Now everything works.
+
+### The final PowerShell script:
 ```powershell
 $fileName=$args[0]
 
@@ -242,12 +282,6 @@ $virusTotalURL = 'https://www.virustotal.com/#/file/' + $hash
 
 Start-Process -FilePath $browserLocation $virusTotalURL
 
-```
-
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
 ```
 
 
