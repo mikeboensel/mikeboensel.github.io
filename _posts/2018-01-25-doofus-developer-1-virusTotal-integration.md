@@ -7,95 +7,135 @@ tags:
 imageFolder: "/images/2018-01-25-doofus-developer-1-virusTotal-integration"
 ---
 
+<link rel="stylesheet" href="/libraries/bootstrap-3.3.7-dist/css/bootstrap-3.3.7.min.css">
+<link rel="stylesheet" href="/libraries/bootstrap-3.3.7-dist/css/bootstrap-theme-3.3.7.min.css">
+<script src="/libraries/jquery-3.2.1.js"></script>
+<script src="/libraries/bootstrap-3.3.7-dist/js/bootstrap-3.3.7.min.js"></script>
+
+
 <style>
     body {
       padding: 0;
       margin: 0;
     }	
 	
-	figure{
+	figure {
 		width:60%; 
 		margin:0px auto 10px auto; 
 		display:block
 	}
+	
+	.jumboFigure {
+		width:95%;
+		margin:30px auto 30px auto; 
+	}
+	
+	
+	figcaption {
+		text-align: center;
+	}
+	
 	
 	.centeredSubContent { /*Takes into account the fact we are in a compressed, centered "reading area". Don't want to protrude from that. */
       max-width: calc(690px - (30px * 2));
 	  text-align: center;
     }
 	
+	.youtubeDiv {
+		text-align:center;
+	}
+	
+	  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+	
 </style>
 
 Part of the <a href="" >Doofus Developer series</a>
 
 Virus scanning downloaded files is the type of task that's not a clear time sink I should automate and yet not
-trivially quick. I did a quick test and found it takes about a minute on average to open a tab, enter the URL,
-navigate the file opener, then wait for the result. Here's the basic procedure. It's a little faster because it starts in the 
-downloads folder. 
+trivially quick. I like to use <a href="https://www.virustotal.com/#/home/upload">VirusTotal</a> for reasons I'll outline in another post. 
+They let you upload a given file and then scan it against many different anti-viruses.
 
-<iframe id="scanProcedure" width="480" height="270" src="https://www.youtube.com/embed/-m1lwTvRG1k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+It takes ~1 minute for me to:
++ Open a tab
++ Enter virustotal.com
++ Navigate the file opener
+
+It's a little faster in the video because we get lucky and the file opener starts in the right place. 
+
+<div class='youtubeDiv'>
+	<iframe id="scanProcedure" width="480" height="270" src="https://www.youtube.com/embed/-m1lwTvRG1k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 I do this several times a day typically, so its time to bite the bullet and automate.
 
-# The goal
+## The goal
 
 I wanted to be able to Right-Click and select "Scan With VirusTotal". So this meant changing the Windows Registry to
-point at some code. 
+point at some code. Let's start with the Registry change.
 
-## Implementing right-click
+### Implementing right-click
 
 I've never been very comfortable working with the Registry. It feels like a dumping ground for 30
 years of bad Windows design and poorly documented features. Fortunately, the changes I would need to make were simple to
-<a href="https://www.howtogeek.com/107965/how-to-add-any-application-shortcut-to-windows-explorers-context-menu/">find</a>
+<a href="https://www.howtogeek.com/107965/how-to-add-any-application-shortcut-to-windows-explorers-context-menu/">find.</a>
 
-I implement that below:
+I implement that below, annotating the process:
 
-<iframe id="registryRightClickSetup" width="480" height="270" src="https://www.youtube.com/embed/CDU-ilOEPxk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class='youtubeDiv'>
+	<iframe id="registryRightClickSetup" width="480" height="270" src="https://www.youtube.com/embed/CDU-ilOEPxk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
-That wasn't too bad.
+That wasn't too bad. Now we just need to implement the code we'll call.
 
-## A VirusTotal client
+### A VirusTotal client
 
-### Thick client failure
+#### Thick client failure
 I initially intended to make a Python or Java program that would call out to VirusTotal when the right-click occurs. I registered for VirusTotal's API. 
-I figured they'd have a reference client. My use case is pretty simple. I got my API key and promptly started flailing. I have
-no idea why it wouldn't work. I may revisit it in the future. But I put in a fruitless hour and a half of failing with their examples,
+I figured they'd have a reference client. I got my API key and promptly started flailing. I have
+no idea why it wouldn't work. It said my API key was not authorized. I put in a fruitless hour and a half with their examples,
 putting a proxy in between to observe the traffic on the wire, and several emails back and forth with a nice Customer Support rep
 (no sarcasm, she was nice, unfortunately, my exact call worked on her end).
 
-"It works on my machine". That's gotta be the most frustrating thing to hear. 
+<figure>
+	<img src='{{ page.imageFolder }}/Shrug.png'>
+    <figcaption>The sound of despair: "It works on my machine".</figcaption>
+</figure>
 
 
 I moved on. I noticed in most cases (95+%) VirusTotal has already seen the file I'm scanning. So there's no need to
 upload it, just to generate the SHA-256 hash, which is passed as a URL parameter. 
 
-<figure>
-	<img src='{{ page.imageFolder }}/VirusTotalHash.jpg'>
-    <figcaption></figcaption>
+<figure class="jumboFigure">
+	<img src='{{ page.imageFolder }}/VirusTotalHash2.jpg'>
+    <figcaption>SHA-256 highlighted in red</figcaption>
 </figure>
 
-So I decided the web is the ultimate API, lets go a simple HTTP GET in the browser.
+So I decided the web is the ultimate API, lets just automate opening up the browser and 
+making a simple HTTP GET passing the SHA-256.
 
-### A foray into PowerShell
+#### A foray into PowerShell
 
-I also decided to change targets. I really didn't want a dependency on something like the Java or Python Runtimes.
-Nor did I want to have to compile. That left native scripting. On Windows that means batch files (old) or PowerShell. So this was a 
+With the simpler approach I could drop the dependency on something like the Java or Python runtimes.
+I didn't want to have to compile either. That left native scripting. On Windows that means batch files (old) or PowerShell. So this was a 
 good opportunity to get acquinted.
 
-This was my first time using PowerShell and some of the syntax seems a bit goofy, but the PowerShell ISE (Interactive Scripting Environment)
- isn't bad. I was able to use 
+This was my first time using PowerShell and some of the syntax seems a bit goofy, but the PowerShell ISE (Interactive Scripting Environment) 
+isn't bad. I was able to use 
 the interactive shell to work through the individual commands. The auto completion and command reference made it pretty 
 easy to create a script that worked in the ISE. 
 
-<figure>
+<figure class="jumboFigure">
 	<img src='{{ page.imageFolder }}/Powershell_ISE_Overview.jpg'>
     <figcaption></figcaption>
 </figure>
 
-
 It SHOULD have worked outside it the ISE as well. Instead, on script execution I got this:
 
-<figure>
+<figure class="jumboFigure">
 	<img src='{{ page.imageFolder }}/ScriptExecutionPolicyError.jpg'>
     <figcaption>Fair enough. The link was even helpful.</figcaption>
 </figure>
@@ -110,51 +150,51 @@ Pretty straightforward.
 
 What followed was another hour of frustration. 
 
-<figure>
-	<img src='{{ page.imageFolder }}/DescentIntoMadness.jpg'>
-    <figcaption>Me after re-reading the same documentation for a third time</figcaption>
-</figure>
-
-
 If you want to descend into madness, read on. To cheerfully jump over the pit of madness to the
 solution, <a href="#Solution">skip below</a>.
 
 
-<figure>
+<figure class="jumboFigure">
 	<img src='{{ page.imageFolder }}/ChangingViewingExecPolicy_Admin.jpg'>
     <figcaption>Looks good...</figcaption>
 </figure>
 
-So what's going on above is I have elevated to Admin and I queried the execution policies using "Get-ExecutionPolicy -l". 
-We see what we expect. Everything is "Undefined" which defaults to "Restricted". I set the LocalMachine policy to "RemoteSigned". 
+So what's going on above is I have elevated to Admin and I queried the execution policies using `Get-ExecutionPolicy -l`. 
+We see what we expect. Everything is "Undefined" which defaults to "Restricted". I set the LocalMachine policy to "RemoteSigned" with `Set-ExecutionPolicy RemoteSigned LocalMachine` 
 We want anyone on the machine to be able to run this virus scan script. Then I query the policies again to make sure it took. Perfect.
 
 As Admin the script ran. I went to the non-admin PowerShell session... it doesn't work. It doesn't even see the changes....
 
-<figure>
+<figure class="jumboFigure">
 	<img src='{{ page.imageFolder }}/ExecutionPolicyNonAdminNotReflected.jpg'>
     <figcaption></figcaption>
 </figure>
 
-So, in order, here's what I did:
+So, in increasing order of desperation, here's what I did:
+
+<figure style="float:right">
+	<img style="margin-left: 67px; height:400px" src='{{ page.imageFolder }}/DescentIntoMadness.jpg'>
+    <figcaption>Me after re-reading the same documentation for a third time</figcaption>
+</figure>
+
 <ol>
     <li>I closed the non-admin window and reopened. Maybe it was holding onto old environment variable values? Nope.
 	</li>
-    <li>I re-read the docs on Execution Policy. Seemed like everything was ok. Maybe for some reason it viewed my script as being 
+	<li>__Restart.__ Nope.
+	</li>
+    <li>I __re-read the docs__ on Execution Policy. Seemed like everything was ok. Maybe for some reason it viewed my script as being 
 		remote and needing to be signed??? I read about how Windows tracks file and ran the <a href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file?view=powershell-5.1">Unblock-File commandlet</a>.
         No relief there.
     </li>
-	<li>Went into the Windows Registry to view the policies directly. They looked right...
+	<li>Check the Windows Registry to view the policies directly. They looked right...
 	</li>
-    <li>Let's try setting the lowest security level of "Bypass" from the admin. Nope.
+    <li>Let's try setting the lowest security level of "Bypass" from the Admin. Nope.
 	</li>
 	<li>Let's set all the categories to "Bypass". Maybe its not using the LocalMachine value (no idea why). Nope.
 	</li>
-    <li>The non-admin doesn't even seem to see the admin changes I started thinking about how Windows permissions work and
-        wondering which policy would apply. For some reason the LocalMachine policy I was setting
-        wasn't being picked up. Hell, it wasn't even being seen. Maybe the non-admin user's CurrentUser setting was
-        overriding it? But how to change that value? You have to be Admin to change any of the policies. So I started looking
-        at Group Policies. Ugh.
+    <li>Started having crazy thoughts about how the Windows permissions model might work. Maybe somehow settings made by the Admin 
+		account only applied to it? But then if you can't set them in non-admin, without becoming Admin, how do you ever set them for
+		non-admin? That made no sense.
     </li>
     <li>Walked around the block.
 	</li>
@@ -172,13 +212,43 @@ And then I noticed a subtle difference. Can you spot it?
     <figcaption></figcaption>
 </figure>
 
-PowerShell x86 vs PowerShell. Were they considered different applications (with different policies) by the OS? Yes...
-Now everything works.
+PowerShell x86 vs PowerShell. Were they considered different applications (with different policies and settings) by the OS? Yes...
 
 <figure>
 	<img src='{{ page.imageFolder }}/SolutionAnnotated.jpg'>
     <figcaption></figcaption>
 </figure>
+
+There are 2 PowerShells, but no God... Now everything works.
+
+The final PowerShell script:
+```powershell
+$fileName=$args[0]
+
+if(!($fileName) -or !(Test-Path $fileName)){ #Null objects are falsy
+#Error case
+#Inform user
+$wshell = New-Object -ComObject Wscript.Shell
+$wshell.Popup("Bad file path passed: " + $fileName,0,"Done",0x1)
+#Stop processing
+exit
+}
+
+$browserLocation = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe';
+
+$hash = (certutil.exe -hashfile $fileName SHA256)[1]
+
+$virusTotalURL = 'https://www.virustotal.com/#/file/' + $hash
+
+Start-Process -FilePath $browserLocation $virusTotalURL
+
+```
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
 
 
 So what did I get for my 4 hours in? If we assume I spend a minute or 2 a day on scanning files in 3-6 months I'm
