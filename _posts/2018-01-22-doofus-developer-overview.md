@@ -24,6 +24,10 @@ imageFolder: "/images/2018-01-22-doofus-developer-overview"
 	  text-align: center;
     }
 	
+	figcaption {
+		text-align: center;
+	}
+	
 </style>
 
 Imposter syndrome is a major issue in our industry. It's understandable. Think about the different events that bring you into interact with peers:
@@ -35,7 +39,7 @@ difficult questions, trying to figure out if you're up to snuff. It feel like an
 
 <figure>
 	<img src='{{ page.imageFolder}}/8ManBattleRoyale.jpg'>
-    <figcaption class="centeredSubContent">Ask me a sorting related question! DO IT! I spent an hour reviewing Radix sort!</figcaption>
+    <figcaption>Ask me a sorting related question! DO IT! I spent an hour reviewing Radix sort!</figcaption>
 </figure>  
 
 Would you mind writing coding your idea up on that whiteboard while talking it through? Oh, so that's an ok answer, but can you do it without 
@@ -66,29 +70,40 @@ You've got a bunch of your peers in a room. Possibly your boss. Everyone might l
 you're competing for raises, promotions, desirable projects, etc. Everyone's trying to present their progress this week in the best terms possible. Clearly, 
 better workplaces are going to have more open and honest communication, but there's no escaping this dynamic. 
 
+<figure>
+	<img src='{{ page.imageFolder}}/PromotedForSure.jpg'>
+    <figcaption></figcaption>
+</figure>  
+
+
 No one is volunteering the fact that they spent 2 hours today before realizing images weren't loading because of a mixup between the Linux filesystem's 
 case sensitivity vs Windows. The day before there was another issue. I didn't have a stop watch, but that was probably an hour. And before that...
 It might get mentioned as an aside. But the gist of what comes out of your mouth is "Made a lot of progress this week, we've got our remote 
 image syncing and display working! Next week I'm moving on to...". 
+<br/>
+<br/>
 
 --------------------------
 
-I had some apprehension about this series. It certainly doesn't make me look like an all-star. 
+<br/>
 
-The concept is writing about losing inordinate amounts of time on trivial issues. The thing is everything's 
-trivial once it's done, everything is obvious in hindsight. At the time though, you go stumbling down many paths before coming to the actual problem. 
-My apprehension arises from what potential employers would think. Hell, I know what I think when I drop an hour or 2 on something like this. 
-
-It leads to a sense that maybe there's something else I should be doing in life. Like flipping burgers or waiting tables. I could probably be 
-good at that. 
+I had some apprehension about this series. If I was a potential employer, I might look at this post and think "Pass on
+this guy". 
 
 However, now with 10 years experience under my belt I feel confident in the fact that:
-1. I'm not terrible
-2. Everyone who's in a technical role is going through the same thing (probably quietly, hoping all the other smart people don't stop by and 
-notice you snuck into this job)
+1. I'm not terrible.
+2. Everyone who works in a technical capacity goes through the same thing (probably quietly, hoping all the other smart people don't stop by and 
+notice you snuck into this job).
 
+This silence contributes to a general imposter syndrome within the industry. Everyone just sees other peoples' finished product, 
+not the boneheaded moments. It leads to a sense that maybe there's something else I should be doing in life, like flipping burgers or 
+moving furniture. I could probably be good at that. 
 
-I think this reality is why articles and tweets that address this get so much traction.
+So I'm starting a series, "Doofus Developer." The concept is writing about losing inordinate amounts of time on often 
+trivial issues. The thing is everything's trivial once it's done, everything is obvious in hindsight. At the time though, you go stumbling down 
+many paths before coming to the actual problem. 
+
+I think this reality is why tweets like this get so much traction.
 
 <figure>
 	<img src='{{ page.imageFolder}}/IAmDevloper.jpg'>
