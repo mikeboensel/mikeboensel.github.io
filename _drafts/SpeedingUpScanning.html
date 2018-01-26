@@ -13,6 +13,8 @@ trivially quick. I did a quick test and found it takes <p class="todo">insert ti
 navigate the file opener, then wait for the result. I do this several times a day typically, so its time
 to bite the bullet and automate.
 
+<iframe id="scanProcedure" width="480" height="270" src="https://www.youtube.com/embed/-m1lwTvRG1k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 <br>
 
 <h1>The goal</h1>
@@ -21,6 +23,8 @@ I wanted to be able to Right-Click and select "Scan With VirusTotal". So this me
 point at some code. I've never been very comfortable working with the Registry. It feels like a dumping ground for 30
 years of bad Windows design and poorly documented features. Fortunately, the changes I would need to make were simple to
 <a href="https://www.howtogeek.com/107965/how-to-add-any-application-shortcut-to-windows-explorers-context-menu/">find</a>
+
+<iframe id="registryRightClickSetup" width="480" height="270" src="https://www.youtube.com/embed/CDU-ilOEPxk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <br>
 Ok, so onto the actual code. I initially tried registering for VirusTotal's API. I intended to make a Python or Java
@@ -56,6 +60,11 @@ by a valid publisher OR if we use the Unblock-File commandlet. Great.
 What followed was another hour of frustration. The changes I made as an admin were not being reflected into the
 non-admin PowerShell session...
 <br>
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-5.1&viewFallbackFrom=powershell-Microsoft.PowerShell.Core
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/unblock-file?view=powershell-5.1
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-5.1
+
+
 So dear reader, if you want to descend into madness, read on. To cheerfully jump over the pit of madness to the
 solution, <a href="#Solution">skip below</a>.
 <ol>
