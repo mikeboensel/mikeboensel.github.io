@@ -19,24 +19,28 @@ Step 3: Test
 Step 4: Believe!
 
 I can't think of a better summary. I know everything I did and the thought process, but I'm still amazed it works. There's just not much 
-code there. I'm sure it can be done more succinctly (and with better naming), but I don't want people to think I'm padding my blog with 
+code there. If you asked me tomorrow why it worked the best I'd have for you is "Well the first few handchecked inputs work. And it seems 
+like it should come together." I feel like you could get burned at the stake for something like this 300 years ago...
+
+I'm sure it can be done more succinctly (and with better naming), but I don't want people to think I'm padding my blog with 
 other people's work :) 
 
 ```Javascript
 function permute(a){
-	//Done if have a single element 
+	//The permutation of a single character is itself
 	if(a.length == 1){
 		return [a];
     }
 	let out = [];
-	//Multiple elements. Let's break them into 2 groups (a single element and all the remainder)
+	//Multiple characters. Let's break them into 2 groups (a single element and all the remainder).
+	//Each character will get to be that super special single element by the end of the loop.
 	for(let i = 0; i < a.length; i++){
 		let singleLetter = a.charAt(i);
 		let theRest = a.slice(0,i).concat(a.slice(i+1));
 
-		let temp = permuteTwoGroups(singleLetter, theRest);
+		let temp = prependLetterToPermutations(singleLetter, theRest);
 		
-		//Putting computations results directly means nesting arrays, undesirable
+		// Need to "flatten" our arrays. Otherwise we end up with nested arrays(['a',['bc']], not ['abc','bac', ...])
 		for(let t of temp){
 			out.push(t);
 		}
@@ -45,26 +49,15 @@ function permute(a){
 	return out;
 }
 
-function permuteTwoGroups(a,b){
-	//Get left and right side's permutations
-	let left = permute(a);
-	let right = permute(b);
-	
-	return combineLeftAndRight(left,right);
-}
+/*create pairing of our selected letter with EVERY permutation of the remainder 
+Examples: 
+	singleLetter: 'a', R:['b'] => ['ab']
+	singleLetter: 'a', R: ['bc','cb'] => ['abc','acb']
+*/
+function prependLetterToPermutations(singleLetter, remainderGroup){
+	let rPermutations = permute(remainderGroup);
 
-//create pairing of EACH left with EVERY right 
-// Examples: 
-// L:['a'] R['b'] => ['ab']
-// L:['a'] R['bc','cb'] => ['abc','acb']
-function combineLeftAndRight(left, right){
-	let out = [];
-	for (let i = 0; i< left.length; i++){
-		for (let j = 0; j< right.length; j++){
-			out.push(left[i] + right[j]);
-		}
-	}
-	return out;
+	return rPermutations.map((i)=>singleLetter + i);
 }
 
 permute("a");
