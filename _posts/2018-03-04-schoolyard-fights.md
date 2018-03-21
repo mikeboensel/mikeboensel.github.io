@@ -24,7 +24,7 @@ I'll ever outgrow, twice, recently. I've spent some time reflecting on it.
 
 I started going back through my old <a href="https://www.amazon.com/First-Course-Probability-8th/dp/013603313X/">A First Course in Probability textbook</a>. 
 It was the only class I've ever had to retake. I got a D, then mercifully a C. Going back through I still can't follow some 
-of the formula manipulations. Its obvious there's a lot of good stuff in there, its just not accessible. That's frustrating now. At the time it was 
+of the formula manipulations. It's obvious there's a lot of good stuff in there, it's just not accessible. That's frustrating now. At the time it was 
 infuriating. Yesterday, the top half of this page took me 20 minutes to work through. 
 
 <figure>
@@ -53,7 +53,7 @@ That final 30% took concepts we'd scratched the surface of and expanded out from
 When I'd look at the lectures the details were sparse. The professor said once: "I don't want to get into the details, but for our purposes 
 just know \<fill in the blank>". And now problems related to it are showing up ... Yeah, you didn't want to deal with it and neither do I....
 
-**So, why was I mad?** Clearly its not a productive emotion for learning...but...
+**So, why was I mad?** Clearly it's not a productive emotion for learning...but...
 
 ## I felt a social contract had been violated
 In my mind that contract read: 
@@ -86,13 +86,13 @@ It feels like your future is on the line. I might as well be on a sub launching 
 	The feeling is basically indistinguishable right now.</figcaption>
 </figure>
 
-Clearly the Coursera course is lower stakes. My investment is just the time I've put in on the previous tests. But it still comes down...
+Clearly the Coursera course is lower stakes. My investment is just the time I've put in on the previous tests. But it still comes down to...
 
 # A sense of disconnect between effort and outcome
 My investment in learning may have no ultimate bearing on my success. I could have reviewed everything, but if I 
 can't discover this new relationship between X and Y that wasn't really touched on by the professor I'm screwed. 
 
-Its certainly reasonable to argue tough, novel problems are a differentiatior. Who should get an A, B, or C? I can buy that. The 
+It's certainly reasonable to argue tough, novel problems are a differentiatior. Who should get an A, B, or C? I can buy that. The 
 issue comes when we cross a threshold. I know I'm not failing the class if I can walk away knowing that I got 90% right. 
 That's a healthy threshold. 80%? Not terrible. 70%... I now have no margin for any silly errors.
 
