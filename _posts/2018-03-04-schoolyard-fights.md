@@ -96,13 +96,13 @@ Its certainly reasonable to argue tough, novel problems are a differentiatior. W
 issue comes when we cross a threshold. I know I'm not failing the class if I can walk away knowing that I got 90% right. 
 That's a healthy threshold. 80%? Not terrible. 70%... I now have no margin for any silly errors.
 
-As the uncertainty mounts my grade becomes more dependent on the professor's discretion. There's a lot suddenly riding on the kindness of 
+**As the uncertainty mounts my grade (future) becomes more dependent on the professor's discretion.** There's a lot suddenly riding on the kindness of 
 a stranger I met a few months ago to give me a fair shake with partial credit, curving, etc.
 
 My younger sister mentioned that the class average on her Thermodynamics midterm was a 43%... I believe her. In quite a 
 few classes I encountered the same thing. 
 
-It's unnerving. Moreover it seems like you're being given something, rather than earning it. I didn't feel like I'd learned the topics in those classes. 
+It's unnerving. **Moreover it seems like you're being given something, rather than earning it.** I didn't feel like I'd learned the topics in those classes. 
 I felt like the teacher and I had mutually failed. Now to avoid the embarassment of dozens of students dropping out or falling behind we'd been given 
 a reprieve. My level of confidence in that material was very low. I wasn't looking over at my buddy and saying: "Let's go out into the world and build bridges.
 Between the 2 of us we got an 86%, so what can't we do!?!"
@@ -110,12 +110,12 @@ Between the 2 of us we got an 86%, so what can't we do!?!"
 You could certainly argue that humility is valuable in education. There's always more to learn. There's a danger in ignorantly believing you know all there is 
 to know, but clearly this is pretty extreme. 
 
-I don't believe the source of the disconnect is malicious, rather...
+**I don't believe the source of the disconnect is malicious**, rather...
 
 # Students are from Saturn, Professors from Pluto
 
 We have 2 very different populations interacting in a course: graduate students (and former grad students) who are acting as 
-professors, TAs, etc. and the students (largely undergrads, who will not go on to postgrad studies). Those groups have different success models. 
+professors, TAs, etc. and the students (largely undergrads, who will not go on to postgrad studies). Those groups **have different success models.** 
 
 As someone entering into this field, if I can apply and understand the basic principles in the real world, that's a fantastic outcome. I'll shake your hand 
 and thank you for a great course.
